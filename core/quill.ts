@@ -192,6 +192,7 @@ class Quill {
     console.log("uploader", this.uploader);
     console.log("theme", this.theme);
     this.emitter.on(Emitter.events.EDITOR_CHANGE, type => {
+      
       if (type === Emitter.events.TEXT_CHANGE) {
         this.root.classList.toggle('ql-blank', this.editor.isBlank());
       }
