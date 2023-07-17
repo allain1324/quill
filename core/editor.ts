@@ -193,6 +193,7 @@ class Editor {
 
   getHTML(index: number, length: number): string {
     const [line, lineOffset] = this.scroll.line(index);
+    console.log("getHTML: ", line, lineOffset);
     if (line) {
       if (line.length() >= lineOffset + length) {
         return convertHTML(line, lineOffset, length, true);
@@ -345,6 +346,7 @@ function convertListHTML(items, lastIndent, types) {
 }
 
 function convertHTML(blot, index, length, isRoot = false) {
+  console.log('convertHTML', blot, index, length, isRoot)
   if (typeof blot.html === 'function') {
     return blot.html(index, length);
   }
