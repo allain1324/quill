@@ -692,6 +692,7 @@ class Quill {
     delta: Delta | Op[],
     source: EmitterSource = Emitter.sources.API,
   ) {
+    console.log('updateContents', delta, source);
     return modify.call(
       this,
       () => {
