@@ -205,6 +205,7 @@ class Clipboard extends Module<ClipboardOptions> {
   }
 
   onPaste(range: Range, { text, html }: { text?: string; html?: string }) {
+    console.log("onPaste", range, text, html);
     const formats = this.quill.getFormat(range.index);
     const pastedDelta = this.convert({ text, html }, formats);
     debug.log('onPaste', pastedDelta, { text, html });
