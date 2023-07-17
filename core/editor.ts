@@ -169,7 +169,6 @@ class Editor {
   }
 
   getFormat(index: number, length = 0): Record<string, unknown> {
-    console.log("getFormat", index, length);
     let lines: (Block | BlockEmbed)[] = [];
     let leaves: LeafBlot[] = [];
     if (length === 0) {
@@ -195,6 +194,7 @@ class Editor {
       }
       return formats;
     });
+    console.log("getFormat", index, length, lineFormats, leafFormats);
     return { ...lineFormats, ...leafFormats };
   }
 
