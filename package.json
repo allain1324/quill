@@ -109,7 +109,6 @@
     "recover": "find . -path './.git' -prune -o -type f -exec rm -f {} + && git reset --hard",
     "quill:copy": "cd .. && sudo rm -r quill && cp -r quill-dev quill && cd quill-dev && yarn recover",
     "build-quill": "npm install && npm run build && rm -r node_modules && yarn quill:copy",
-    "delete-files": "node delete-files-script.js"
   },
   "overrides": {
     "saucelabs": "^7.2.2",
