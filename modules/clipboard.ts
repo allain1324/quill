@@ -161,6 +161,7 @@ class Clipboard extends Module<ClipboardOptions> {
   }
 
   onCaptureCopy(e: ClipboardEvent, isCut = false) {
+    console.log("onCaptureCopy", e, isCut);
     if (e.defaultPrevented) return;
     e.preventDefault();
     const [range] = this.quill.selection.getRange();
@@ -174,6 +175,7 @@ class Clipboard extends Module<ClipboardOptions> {
   }
 
   onCapturePaste(e: ClipboardEvent) {
+    console.log("onCaptureCopy", e);
     if (e.defaultPrevented || !this.quill.isEnabled()) return;
     e.preventDefault();
     const range = this.quill.getSelection(true);
