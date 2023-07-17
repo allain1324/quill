@@ -144,6 +144,7 @@ class Clipboard extends Module<ClipboardOptions> {
     html?: string,
     source: EmitterSource = Quill.sources.API,
   ) {
+    debug.log('dangerouslyPasteHTML', index, html, source);
     if (typeof index === 'string') {
       const delta = this.convert({ html: index, text: '' });
       // @ts-expect-error
