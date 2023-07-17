@@ -250,7 +250,6 @@ class Editor {
   }
 
   isBlank(): boolean {
-    console.log("isBlank");
     if (this.scroll.children.length === 0) return true;
     if (this.scroll.children.length > 1) return false;
     const blot = this.scroll.children.head;

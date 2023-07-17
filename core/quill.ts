@@ -791,7 +791,6 @@ function expandConfig(
 // Handle selection preservation and TEXT_CHANGE emission
 // common to modification APIs
 function modify(modifier, source, index, shift) {
-  console.log("modify", modifier, source, index, shift);
   if (
     !this.isEnabled() &&
     source === Emitter.sources.USER &&
@@ -820,6 +819,7 @@ function modify(modifier, source, index, shift) {
       this.emitter.emit(...args);
     }
   }
+  console.log("modify", modifier, source, index, shift, change);
   return change;
 }
 
