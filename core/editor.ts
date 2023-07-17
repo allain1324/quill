@@ -27,6 +27,7 @@ class Editor {
   }
 
   applyDelta(delta: Delta): Delta {
+    console.log("applyDelta", delta);
     this.scroll.update();
     let scrollLength = this.scroll.length();
     this.scroll.batchStart();
@@ -120,6 +121,7 @@ class Editor {
   }
 
   deleteText(index: number, length: number): Delta {
+    console.log("deleteText", index, length);
     this.scroll.deleteAt(index, length);
     return this.update(new Delta().retain(index).delete(length));
   }
@@ -129,6 +131,7 @@ class Editor {
     length: number,
     formats: Record<string, unknown> = {},
   ): Delta {
+    console.log("formatLine", index, length, formats);
     this.scroll.update();
     Object.keys(formats).forEach(format => {
       this.scroll.lines(index, Math.max(length, 1)).forEach(line => {
@@ -145,6 +148,7 @@ class Editor {
     length: number,
     formats: Record<string, unknown> = {},
   ): Delta {
+    console.log("formatText", index, length, formats);
     Object.keys(formats).forEach(format => {
       this.scroll.formatAt(index, length, format, formats[format]);
     });
@@ -153,16 +157,19 @@ class Editor {
   }
 
   getContents(index: number, length: number): Delta {
+    console.log("getContents", index, length);
     return this.delta.slice(index, index + length);
   }
 
   getDelta(): Delta {
+    console.log("getDelta");
     return this.scroll.lines().reduce((delta, line) => {
       return delta.concat(line.delta());
     }, new Delta());
   }
 
   getFormat(index: number, length = 0): Record<string, unknown> {
+    console.log("getFormat", index, length);
     let lines: (Block | BlockEmbed)[] = [];
     let leaves: LeafBlot[] = [];
     if (length === 0) {
@@ -192,6 +199,7 @@ class Editor {
   }
 
   getHTML(index: number, length: number): string {
+    console.log("getHTML", index, length);
     const [line, lineOffset] = this.scroll.line(index);
     console.log("getHTML: ", line, lineOffset);
     if (line) {
@@ -204,6 +212,7 @@ class Editor {
   }
 
   getText(index: number, length: number): string {
+    console.log("getText", index, length);
     return this.getContents(index, length)
       .filter(op => typeof op.insert === 'string')
       .map(op => op.insert)
@@ -211,6 +220,7 @@ class Editor {
   }
 
   insertContents(index: number, contents: Delta): Delta {
+    console.log("insertContents", index, contents);
     const normalizedDelta = normalizeDelta(contents);
     const change = new Delta().retain(index).concat(normalizedDelta);
     this.scroll.insertContents(index, normalizedDelta);
@@ -218,6 +228,7 @@ class Editor {
   }
 
   insertEmbed(index: number, embed: string, value: unknown): Delta {
+    console.log("insertEmbed", index, embed, value);
     this.scroll.insertAt(index, embed, value);
     return this.update(new Delta().retain(index).insert({ [embed]: value }));
   }
@@ -227,6 +238,7 @@ class Editor {
     text: string,
     formats: Record<string, unknown> = {},
   ): Delta {
+    console.log("insert Text", index, text, formats);
     text = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
     this.scroll.insertAt(index, text);
     Object.keys(formats).forEach(format => {
@@ -238,6 +250,7 @@ class Editor {
   }
 
   isBlank(): boolean {
+    console.log("isBlank");
     if (this.scroll.children.length === 0) return true;
     if (this.scroll.children.length > 1) return false;
     const blot = this.scroll.children.head;
@@ -248,6 +261,7 @@ class Editor {
   }
 
   removeFormat(index: number, length: number): Delta {
+    console.log("removeFormat", index, length);
     const text = this.getText(index, length);
     const [line, offset] = this.scroll.line(index + length);
     let suffixLength = 0;
@@ -270,6 +284,7 @@ class Editor {
     mutations: MutationRecord[] = [],
     selectionInfo: SelectionInfo | undefined = undefined,
   ): Delta {
+    console.log("update editor", change, mutations, selectionInfo);
     const oldDelta = this.delta;
     if (
       mutations.length === 1 &&
@@ -313,6 +328,7 @@ class Editor {
 }
 
 function convertListHTML(items, lastIndent, types) {
+  console.log("convertListHTML", items, lastIndent, types);
   if (items.length === 0) {
     const [endTag] = getListType(types.pop());
     if (lastIndent <= 0) {
@@ -407,6 +423,7 @@ function combineFormats(formats, combined) {
 }
 
 function getListType(type) {
+  console.log("getListType", type);
   const tag = type === 'ordered' ? 'ol' : 'ul';
   switch (type) {
     case 'checked':
@@ -419,6 +436,7 @@ function getListType(type) {
 }
 
 function normalizeDelta(delta: Delta) {
+  console.log("normalizeDelta", delta);
   return delta.reduce((normalizedDelta, op) => {
     if (typeof op.insert === 'string') {
       const text = op.insert.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
@@ -429,10 +447,12 @@ function normalizeDelta(delta: Delta) {
 }
 
 function shiftRange({ index, length }: Range, amount: number) {
+  console.log("shiftRange", index,length, amount);
   return new Range(index + amount, length);
 }
 
 function splitOpLines(ops: Op[]) {
+  console.log("splitOpLines", ops)
   const split: Op[] = [];
   ops.forEach(op => {
     if (typeof op.insert === 'string') {
