@@ -63,6 +63,7 @@ class History extends Module<HistoryOptions> {
   }
 
   change(source: 'undo' | 'redo', dest: 'redo' | 'undo') {
+    console.log("change history", source, dest);
     if (this.stack[source].length === 0) return;
     const delta = this.stack[source].pop();
     if (!delta) return;
