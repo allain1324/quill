@@ -182,6 +182,15 @@ class Quill {
     this.uploader = this.theme.addModule('uploader');
     this.theme.addModule('input');
     this.theme.init();
+    console.log("new editor", this.editor);
+    console.log("new selection", this.selection);
+    console.log("new composition", this.composition);
+    console.log("new theme", this.theme);
+    console.log("new keyboard", this.keyboard);
+    console.log("clipboard", this.clipboard);
+    console.log("history", this.history);
+    console.log("uploader", this.uploader);
+    console.log("theme", this.theme);
     this.emitter.on(Emitter.events.EDITOR_CHANGE, type => {
       if (type === Emitter.events.TEXT_CHANGE) {
         this.root.classList.toggle('ql-blank', this.editor.isBlank());
