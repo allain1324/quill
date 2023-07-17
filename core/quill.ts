@@ -182,17 +182,18 @@ class Quill {
     this.uploader = this.theme.addModule('uploader');
     this.theme.addModule('input');
     this.theme.init();
-    console.log("new editor", this.editor);
-    console.log("new selection", this.selection);
-    console.log("new composition", this.composition);
-    console.log("new theme", this.theme);
-    console.log("new keyboard", this.keyboard);
-    console.log("clipboard", this.clipboard);
-    console.log("history", this.history);
-    console.log("uploader", this.uploader);
-    console.log("theme", this.theme);
+    debug.log("this.scroll", this.scroll);
+    // debug.log("new editor", this.editor);
+    // debug.log("new selection", this.selection);
+    // debug.log("new composition", this.composition);
+    // debug.log("new theme", this.theme);
+    // debug.log("new keyboard", this.keyboard);
+    // debug.log("clipboard", this.clipboard);
+    // debug.log("history", this.history);
+    // debug.log("uploader", this.uploader);
+    // debug.log("theme", this.theme);
     this.emitter.on(Emitter.events.EDITOR_CHANGE, type => {
-      
+      debug.log("editor changed 123", type); 
       if (type === Emitter.events.TEXT_CHANGE) {
         this.root.classList.toggle('ql-blank', this.editor.isBlank());
       }
@@ -269,6 +270,7 @@ class Quill {
   ): Delta {
     // @ts-expect-error
     [index, length, , source] = overload(index, length, source);
+    debug.log("overload", index, length, source)
     return modify.call(
       this,
       () => {
@@ -566,6 +568,7 @@ class Quill {
     // eslint-disable-next-line prefer-const
     // @ts-expect-error
     [index, , formats, source] = overload(index, 0, name, value, source);
+    debug.log('overload', index, formats, source);
     return modify.call(
       this,
       () => {
@@ -788,6 +791,7 @@ function expandConfig(
 // Handle selection preservation and TEXT_CHANGE emission
 // common to modification APIs
 function modify(modifier, source, index, shift) {
+  console.log("modify", modifier, source, index, shift);
   if (
     !this.isEnabled() &&
     source === Emitter.sources.USER &&
