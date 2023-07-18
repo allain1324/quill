@@ -173,6 +173,7 @@ class Editor {
     let leaves: LeafBlot[] = [];
     if (length === 0) {
       this.scroll.path(index).forEach(path => {
+        console.log("getFormat-path", path)
         const [blot] = path;
         if (blot instanceof Block) {
           lines.push(blot);
@@ -183,14 +184,17 @@ class Editor {
     } else {
       lines = this.scroll.lines(index, length);
       leaves = this.scroll.descendants(LeafBlot, index, length);
+      console.log("get Format length != 0", lines, leaves);
     }
     const [lineFormats, leafFormats] = [lines, leaves].map(blots => {
       if (blots.length === 0) return {};
       let formats = bubbleFormats(blots.shift());
+      console.log("getFormat formats", formats);
       while (Object.keys(formats).length > 0) {
         const blot = blots.shift();
         if (blot == null) return formats;
         formats = combineFormats(bubbleFormats(blot), formats);
+        console.log("getFormat formats in while", formats);
       }
       return formats;
     });
