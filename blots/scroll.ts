@@ -150,6 +150,7 @@ class Scroll extends ScrollBlot {
   }
 
   insertContents(index: number, delta: Delta) {
+    console.log("scroll-insertContents", index, delta);
     const renderBlocks = this.deltaToRenderBlocks(
       delta.concat(new Delta().insert('\n')),
     );
