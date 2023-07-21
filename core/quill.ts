@@ -687,6 +687,7 @@ class Quill {
   }
 
   update(source: EmitterSource = Emitter.sources.USER) {
+    console.log("quill update", source);
     const change = this.scroll.update(source); // Will update selection before selection.update() does if text changes
     this.selection.update(source);
     // TODO this is usually undefined
