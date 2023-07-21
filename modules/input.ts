@@ -9,8 +9,9 @@ const INSERT_TYPES = ['insertText', 'insertReplacementText'];
 class Input extends Module {
   constructor(quill: Quill, options: Record<string, never>) {
     super(quill, options);
-
+    console.log("module-input-constructor");
     quill.root.addEventListener('beforeinput', event => {
+      console.log("module-input-constructor-beforeinput");
       this.handleBeforeInput(event);
     });
 
@@ -24,10 +25,12 @@ class Input extends Module {
   }
 
   private deleteRange(range: Range) {
+    console.log("module-input-deleteRange");
     deleteRange({ range, quill: this.quill });
   }
 
   private replaceText(range: Range, text = '') {
+    console.log("module-input-replaceText");
     if (range.length === 0) return false;
 
     if (text) {
@@ -47,6 +50,7 @@ class Input extends Module {
   }
 
   private handleBeforeInput(event: InputEvent) {
+    console.log("module-input-handleBeforeInput");
     if (
       this.quill.composition.isComposing ||
       event.defaultPrevented ||
@@ -76,6 +80,7 @@ class Input extends Module {
   }
 
   private handleCompositionStart() {
+    console.log("module-input-handleCompositionStart");
     const range = this.quill.getSelection();
     if (range) {
       this.replaceText(range);
@@ -90,7 +95,7 @@ function getPlainTextFromInputEvent(event: InputEvent) {
   // When `inputType` is "insertReplacementText":
   // - `event.data` should be null.
   // - `event.dataTransfer` should contain "text/plain" data.
-
+  console.log("module-input-getPlainTextFromInputEvent");
   if (typeof event.data === 'string') {
     return event.data;
   }
