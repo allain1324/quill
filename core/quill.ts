@@ -226,10 +226,12 @@ class Quill {
       );
     });
     if (html) {
+      console.log("before convert", html);
       const contents = this.clipboard.convert({
         html: `${html}<p><br></p>`,
         text: '\n',
       });
+      console.log("html converted", contents);
       this.setContents(contents);
     }
     this.history.clear();
