@@ -36,7 +36,7 @@ class Selection {
   lastNative: NormalizedRange | null;
 
   constructor(scroll: Scroll, emitter: Emitter) {
-    console.log("core-selection-constructor");
+    console.log("core-selection-constructor", scroll, emitter);
     this.emitter = emitter;
     this.scroll = scroll;
     this.composing = false;
@@ -136,7 +136,7 @@ class Selection {
   }
 
   format(format, value) {
-    console.log("core-selection-format");
+    console.log("core-selection-format", format, value);
     this.scroll.update();
     const nativeRange = this.getNativeRange();
     if (
@@ -166,7 +166,7 @@ class Selection {
   }
 
   getBounds(index: number, length = 0) {
-    console.log("core-selection-getBounds");
+    console.log("core-selection-getBounds", index, length);
     const scrollLength = this.scroll.length();
     index = Math.min(index, scrollLength - 1);
     length = Math.min(index + length, scrollLength - 1) - index;
@@ -252,7 +252,7 @@ class Selection {
   }
 
   normalizedToRange(range: NormalizedRange) {
-    console.log("core-selection-normalizedToRange");
+    console.log("core-selection-normalizedToRange", range);
     const positions: [Node, number][] = [
       [range.start.node, range.start.offset],
     ];
@@ -279,7 +279,7 @@ class Selection {
   }
 
   normalizeNative(nativeRange: NativeRange) {
-    console.log("core-selection-normalizeNative");
+    console.log("core-selection-normalizeNative", nativeRange);
     if (
       !contains(this.root, nativeRange.startContainer) ||
       (!nativeRange.collapsed && !contains(this.root, nativeRange.endContainer))
@@ -323,7 +323,7 @@ class Selection {
   }
 
   rangeToNative(range: Range): [Node | null, number, Node | null, number] {
-    console.log("core-selection-rangeToNative");
+    console.log("core-selection-rangeToNative", range);
     const scrollLength = this.scroll.length();
 
     const getPosition = (
@@ -341,7 +341,7 @@ class Selection {
   }
 
   scrollIntoView(scrollingContainer: Element) {
-    console.log("core-selection-scrollIntoView");
+    console.log("core-selection-scrollIntoView", scrollingContainer);
     const range = this.lastRange;
     if (range == null) return;
     const bounds = this.getBounds(range.index, range.length);
@@ -361,8 +361,7 @@ class Selection {
     endOffset = startOffset,
     force = false,
   ) {
-    console.log("core-selection-setNativeRange");
-    debug.info('setNativeRange', startNode, startOffset, endNode, endOffset);
+    console.log("core-selection-setNativeRange", startNode, startOffset, endNode, endOffset, force);
     if (
       startNode != null &&
       (this.root.parentNode == null ||
@@ -420,7 +419,7 @@ class Selection {
     force: boolean | EmitterSource = false,
     source: EmitterSource = Emitter.sources.API,
   ): void {
-    console.log("core-selection-setRange");
+    console.log("core-selection-setRange", range, force, source);
     if (typeof force === 'string') {
       source = force;
       force = false;
@@ -436,7 +435,7 @@ class Selection {
   }
 
   update(source: EmitterSource = Emitter.sources.USER) {
-    console.log("core-selection-update");
+    console.log("core-selection-update", source);
     const oldRange = this.lastRange;
     const [lastRange, nativeRange] = this.getRange();
     this.lastRange = lastRange;
@@ -476,7 +475,7 @@ class Selection {
 }
 
 function contains(parent, descendant) {
-  console.log("core-selection-contains");
+  console.log("core-selection-contains", parent, descendant);
   try {
     // Firefox inserts inaccessible nodes around video elements
     descendant.parentNode; // eslint-disable-line @typescript-eslint/no-unused-expressions

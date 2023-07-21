@@ -51,14 +51,14 @@ class Emitter extends EventEmitter<string> {
   }
 
   emit(...args: unknown[]): boolean {
-    console.log("core-emitter-emit");
+    console.log("core-emitter-emit", args);
     debug.log.call(debug, ...args);
     // @ts-expect-error
     return super.emit(...args);
   }
 
   handleDOM(event, ...args: unknown[]) {
-    console.log("core-emitter-handleDOM");
+    console.log("core-emitter-handleDOM", event, args);
     (this.listeners[event.type] || []).forEach(({ node, handler }) => {
       if (event.target === node || node.contains(event.target)) {
         handler(event, ...args);
@@ -67,7 +67,7 @@ class Emitter extends EventEmitter<string> {
   }
 
   listenDOM(eventName: string, node, handler) {
-    console.log("core-emitter-listenDOM");
+    console.log("core-emitter-listenDOM", eventName, node, handler);
     if (!this.listeners[eventName]) {
       this.listeners[eventName] = [];
     }
