@@ -159,7 +159,6 @@ class Quill {
       Quill.debug(this.options.debug);
     }
     const html = this.container.innerHTML.trim();
-    console.log("html", html);
     this.container.classList.add('ql-container');
     this.container.innerHTML = '';
     instances.set(this.container, this);
@@ -228,7 +227,6 @@ class Quill {
         Quill.sources.USER,
       );
     });
-    console.log("html", html);
     if (html) {
       console.log("before convert", html);
       const contents = this.clipboard.convert({
