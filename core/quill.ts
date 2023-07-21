@@ -204,7 +204,7 @@ class Quill {
       const [newRange] = this.selection.getRange();
       const selectionInfo =
         oldRange && newRange ? { oldRange, newRange } : undefined;
-      console.log("quill--Emitter.events.SCROLL_UPDATE", oldRange, newRange, selectionInfo);
+      console.log("quill--Emitter.events.SCROLL_UPDATE", source, mutations);
       modify.call(
         this,
         () => this.editor.update(null, mutations, selectionInfo),
