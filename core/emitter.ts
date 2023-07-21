@@ -17,6 +17,7 @@ EVENTS.forEach(eventName => {
 });
 
 class Emitter extends EventEmitter<string> {
+  
   static events = {
     EDITOR_CHANGE: 'editor-change',
     SCROLL_BEFORE_UPDATE: 'scroll-before-update',
@@ -46,15 +47,18 @@ class Emitter extends EventEmitter<string> {
     super();
     this.listeners = {};
     this.on('error', debug.error);
+    console.log("core-emitter-constructor");
   }
 
   emit(...args: unknown[]): boolean {
+    console.log("core-emitter-emit");
     debug.log.call(debug, ...args);
     // @ts-expect-error
     return super.emit(...args);
   }
 
   handleDOM(event, ...args: unknown[]) {
+    console.log("core-emitter-handleDOM");
     (this.listeners[event.type] || []).forEach(({ node, handler }) => {
       if (event.target === node || node.contains(event.target)) {
         handler(event, ...args);
@@ -63,6 +67,7 @@ class Emitter extends EventEmitter<string> {
   }
 
   listenDOM(eventName: string, node, handler) {
+    console.log("core-emitter-listenDOM");
     if (!this.listeners[eventName]) {
       this.listeners[eventName] = [];
     }

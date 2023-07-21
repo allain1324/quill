@@ -148,6 +148,7 @@ class Quill {
   options: ExpandedOptions;
 
   constructor(container: HTMLElement | string, options: Options = {}) {
+    console.log("core-quill-constructor");
     this.options = expandConfig(container, options);
     this.container = this.options.container;
     if (this.container == null) {
@@ -253,6 +254,7 @@ class Quill {
     container: string | HTMLElement,
     refNode: Node | null = null,
   ): HTMLDivElement | HTMLElement {
+    console.log("core-quill-addContainer");
     if (typeof container === 'string') {
       const className = container;
       container = document.createElement('div');
@@ -273,9 +275,9 @@ class Quill {
     length?: number | EmitterSource,
     source?: EmitterSource,
   ): Delta {
+    console.log("core-quill-deleteText");
     // @ts-expect-error
     [index, length, , source] = overload(index, length, source);
-    debug.log("overload", index, length, source)
     return modify.call(
       this,
       () => {
@@ -293,6 +295,7 @@ class Quill {
   }
 
   editReadOnly<T>(modifier: () => T): T {
+    console.log("core-quill-editReadOnly");
     this.allowReadOnlyEdits = true;
     const value = modifier();
     this.allowReadOnlyEdits = false;
@@ -300,11 +303,13 @@ class Quill {
   }
 
   enable(enabled = true) {
+    console.log("core-quill-editReadOnly");
     this.scroll.enable(enabled);
     this.container.classList.toggle('ql-disabled', !enabled);
   }
 
   focus() {
+    console.log("core-quill-focus");
     const { scrollTop } = this.scrollingContainer;
     this.selection.focus();
     this.scrollingContainer.scrollTop = scrollTop;
@@ -316,6 +321,7 @@ class Quill {
     value: unknown,
     source: EmitterSource = Emitter.sources.API,
   ) {
+    console.log("core-quill-format");
     return modify.call(
       this,
       () => {
@@ -361,6 +367,7 @@ class Quill {
     value?: unknown | EmitterSource,
     source?: EmitterSource,
   ) {
+    console.log("core-quill-formatLine");
     let formats;
     // eslint-disable-next-line prefer-const
     [index, length, formats, source] = overload(
@@ -402,6 +409,7 @@ class Quill {
     value?: unknown | EmitterSource,
     source?: EmitterSource,
   ): Delta {
+    console.log("core-quill-formatText");
     let formats;
     // eslint-disable-next-line prefer-const
     [index, length, formats, source] = overload(
@@ -425,6 +433,7 @@ class Quill {
   }
 
   getBounds(index, length = 0) {
+    console.log("core-quill-getBounds");
     let bounds;
     if (typeof index === 'number') {
       bounds = this.selection.getBounds(index, length);
@@ -444,6 +453,7 @@ class Quill {
   }
 
   getContents(index = 0, length = this.getLength() - index) {
+    console.log("core-quill-getContents");
     [index, length] = overload(index, length);
     return this.editor.getContents(index, length);
   }
@@ -454,6 +464,7 @@ class Quill {
     index: { index: number; length: number } | number = this.getSelection(true),
     length = 0,
   ) {
+    console.log("core-quill-getFormat");
     if (typeof index === 'number') {
       return this.editor.getFormat(index, length);
     }
@@ -506,6 +517,7 @@ class Quill {
     index: { index: number; length: number } | number = 0,
     length?: number,
   ) {
+    console.log("core-quill-getSemanticHTML");
     if (typeof index === 'number') {
       length = this.getLength() - index;
     }
@@ -538,6 +550,7 @@ class Quill {
     value: unknown,
     source: EmitterSource = Quill.sources.API,
   ) {
+    console.log("core-quill-insertEmbed");
     return modify.call(
       this,
       () => {
@@ -569,6 +582,7 @@ class Quill {
     value?: unknown,
     source?: EmitterSource,
   ): Delta {
+    console.log("core-quill-insertText");
     let formats;
     // eslint-disable-next-line prefer-const
     // @ts-expect-error
@@ -617,14 +631,17 @@ class Quill {
   ): Emitter;
   on(event: string, ...args: unknown[]): Emitter;
   on(...args: Parameters<typeof Emitter['prototype']['on']>): Emitter {
+    console.log("core-quill-on");
     return this.emitter.on(...args);
   }
 
   once(...args: Parameters<typeof Emitter['prototype']['once']>) {
+    console.log("core-quill-once");
     return this.emitter.once(...args);
   }
 
   removeFormat(...args: Parameters<typeof overload>) {
+    console.log("core-quill-removeFormat");
     const [index, length, , source] = overload(...args);
     return modify.call(
       this,
@@ -644,6 +661,7 @@ class Quill {
     delta: Delta | Op[],
     source: EmitterSource = Emitter.sources.API,
   ) {
+    console.log("core-quill-setContents");
     return modify.call(
       this,
       () => {
@@ -668,6 +686,7 @@ class Quill {
     length?: EmitterSource | number,
     source?: EmitterSource,
   ): void {
+    console.log("core-quill-setSelection");
     if (index == null) {
       // @ts-expect-error https://github.com/microsoft/TypeScript/issues/22609
       this.selection.setRange(null, length || Quill.sources.API);
@@ -682,12 +701,13 @@ class Quill {
   }
 
   setText(text: string, source: EmitterSource = Emitter.sources.API) {
+    console.log("core-quill-setText");
     const delta = new Delta().insert(text);
     return this.setContents(delta, source);
   }
 
   update(source: EmitterSource = Emitter.sources.USER) {
-    console.log("quill update", source);
+    console.log("core-quill-update");
     const change = this.scroll.update(source); // Will update selection before selection.update() does if text changes
     this.selection.update(source);
     // TODO this is usually undefined
@@ -698,7 +718,7 @@ class Quill {
     delta: Delta | Op[],
     source: EmitterSource = Emitter.sources.API,
   ) {
-    console.log('updateContents', delta, source);
+    console.log("core-quill-updateContents");
     return modify.call(
       this,
       () => {
@@ -715,6 +735,7 @@ function expandConfig(
   container: HTMLElement | string,
   userConfig: Options,
 ): ExpandedOptions {
+  console.log("core-quill-expandConfig");
   let expandedConfig = merge(
     {
       container,
@@ -798,6 +819,7 @@ function expandConfig(
 // Handle selection preservation and TEXT_CHANGE emission
 // common to modification APIs
 function modify(modifier, source, index, shift) {
+  console.log("core-quill-modify");
   if (
     !this.isEnabled() &&
     source === Emitter.sources.USER &&
@@ -874,6 +896,7 @@ function overload(
   value?: unknown | EmitterSource,
   source?: EmitterSource,
 ): NormalizedIndexLength {
+  console.log("core-quill-overload");
   let formats = {};
   // @ts-expect-error
   if (typeof index.index === 'number' && typeof index.length === 'number') {
@@ -921,6 +944,7 @@ function overload(
 }
 
 function shiftRange(range, index, length, source?: EmitterSource) {
+  console.log("core-quill-shiftRange");
   if (range == null) return null;
   let start;
   let end;

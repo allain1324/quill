@@ -87,9 +87,11 @@ class Clipboard extends Module<ClipboardOptions> {
         this.addMatcher(selector, matcher);
       },
     );
+    console.log("modules-quill-constructor")
   }
 
   addMatcher(selector: Selector, matcher: Matcher) {
+    console.log("modules-quill-addMatcher")
     this.matchers.push([selector, matcher]);
   }
 
@@ -97,6 +99,7 @@ class Clipboard extends Module<ClipboardOptions> {
     { html, text }: { html?: string; text?: string },
     formats: Record<string, unknown> = {},
   ) {
+    console.log("modules-quill-convert")
     if (formats[CodeBlock.blotName]) {
       return new Delta().insert(text || '', {
         [CodeBlock.blotName]: formats[CodeBlock.blotName],
@@ -117,6 +120,7 @@ class Clipboard extends Module<ClipboardOptions> {
   }
 
   convertHTML(html: string) {
+    console.log("modules-quill-convertHTML")
     const doc = new DOMParser().parseFromString(html, 'text/html');
     const container = doc.body;
     const nodeMatches = new WeakMap();
@@ -144,7 +148,7 @@ class Clipboard extends Module<ClipboardOptions> {
     html?: string,
     source: EmitterSource = Quill.sources.API,
   ) {
-    debug.log('dangerouslyPasteHTML', index, html, source);
+    console.log("modules-quill-dangerouslyPasteHTML")
     if (typeof index === 'string') {
       const delta = this.convert({ html: index, text: '' });
       // @ts-expect-error
@@ -161,7 +165,6 @@ class Clipboard extends Module<ClipboardOptions> {
   }
 
   onCaptureCopy(e: ClipboardEvent, isCut = false) {
-    console.log("onCaptureCopy", e, isCut);
     if (e.defaultPrevented) return;
     e.preventDefault();
     const [range] = this.quill.selection.getRange();
@@ -175,7 +178,6 @@ class Clipboard extends Module<ClipboardOptions> {
   }
 
   onCapturePaste(e: ClipboardEvent) {
-    console.log("onCaptureCopy", e);
     if (e.defaultPrevented || !this.quill.isEnabled()) return;
     e.preventDefault();
     const range = this.quill.getSelection(true);
@@ -226,6 +228,7 @@ class Clipboard extends Module<ClipboardOptions> {
   }
 
   prepareMatching(container: Element, nodeMatches: WeakMap<Node, Matcher[]>) {
+    console.log("modules-quill-prepareMatching")
     const elementMatchers: Matcher[] = [];
     const textMatchers: Matcher[] = [];
     this.matchers.forEach(pair => {
@@ -263,6 +266,7 @@ function applyFormat(
   format: string | Record<string, unknown>,
   value?: unknown,
 ): Delta {
+  console.log("modules-quill-applyFormat")
   if (typeof format === 'object') {
     return Object.keys(format).reduce((newDelta, key) => {
       return applyFormat(newDelta, key, format[key]);
@@ -279,6 +283,7 @@ function applyFormat(
 }
 
 function deltaEndsWith(delta: Delta, text: string) {
+  console.log("modules-quill-deltaEndsWith")
   let endText = '';
   for (
     let i = delta.ops.length - 1;
@@ -293,6 +298,7 @@ function deltaEndsWith(delta: Delta, text: string) {
 }
 
 function isLine(node: Element) {
+  console.log("modules-quill-isLine")
   if (node.childNodes.length === 0) return false; // Exclude embed blocks
   return [
     'address',
@@ -353,6 +359,7 @@ function traverse(
   textMatchers: Matcher[],
   nodeMatches: WeakMap<Node, Matcher[]>,
 ) {
+  console.log("modules-quill-traverse")
   // Post-order
   if (node.nodeType === node.TEXT_NODE) {
     return textMatchers.reduce((delta: Delta, matcher) => {
@@ -390,6 +397,7 @@ function matchAlias(format: string, node: Element, delta: Delta) {
 }
 
 function matchAttributor(node: HTMLElement, delta: Delta, scroll: ScrollBlot) {
+  console.log("modules-quill-matchAttributor")
   const attributes = Attributor.keys(node);
   const classes = ClassAttributor.keys(node);
   const styles = StyleAttributor.keys(node);
@@ -420,6 +428,7 @@ function matchAttributor(node: HTMLElement, delta: Delta, scroll: ScrollBlot) {
 }
 
 function matchBlot(node: Node, delta: Delta, scroll: ScrollBlot) {
+  console.log("modules-quill-matchBlot")
   const match = scroll.query(node);
   if (match == null) return delta;
   // @ts-expect-error
@@ -448,6 +457,7 @@ function matchBlot(node: Node, delta: Delta, scroll: ScrollBlot) {
 }
 
 function matchBreak(node: Node, delta: Delta) {
+  console.log("modules-quill-matchBreak")
   if (!deltaEndsWith(delta, '\n')) {
     delta.insert('\n');
   }

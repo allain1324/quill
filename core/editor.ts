@@ -24,10 +24,11 @@ class Editor {
   constructor(scroll: Scroll) {
     this.scroll = scroll;
     this.delta = this.getDelta();
+    console.log("core-editor-constructor");
   }
 
   applyDelta(delta: Delta): Delta {
-    console.log("applyDelta", delta);
+    console.log("core-editor-applyDelta");
     this.scroll.update();
     let scrollLength = this.scroll.length();
     this.scroll.batchStart();
@@ -121,7 +122,7 @@ class Editor {
   }
 
   deleteText(index: number, length: number): Delta {
-    console.log("deleteText", index, length);
+    console.log("core-editor-deleteText");
     this.scroll.deleteAt(index, length);
     return this.update(new Delta().retain(index).delete(length));
   }
@@ -131,7 +132,7 @@ class Editor {
     length: number,
     formats: Record<string, unknown> = {},
   ): Delta {
-    console.log("formatLine", index, length, formats);
+    console.log("core-editor-formatLine");
     this.scroll.update();
     Object.keys(formats).forEach(format => {
       this.scroll.lines(index, Math.max(length, 1)).forEach(line => {
@@ -148,7 +149,7 @@ class Editor {
     length: number,
     formats: Record<string, unknown> = {},
   ): Delta {
-    console.log("formatText", index, length, formats);
+    console.log("core-editor-formatText");
     Object.keys(formats).forEach(format => {
       this.scroll.formatAt(index, length, format, formats[format]);
     });
@@ -157,18 +158,19 @@ class Editor {
   }
 
   getContents(index: number, length: number): Delta {
-    console.log("getContents", index, length);
+    console.log("core-editor-getContents");
     return this.delta.slice(index, index + length);
   }
 
   getDelta(): Delta {
-    console.log("getDelta");
+    console.log("core-editor-getDelta");
     return this.scroll.lines().reduce((delta, line) => {
       return delta.concat(line.delta());
     }, new Delta());
   }
 
   getFormat(index: number, length = 0): Record<string, unknown> {
+    console.log("core-editor-getFormat");
     let lines: (Block | BlockEmbed)[] = [];
     let leaves: LeafBlot[] = [];
     if (length === 0) {
@@ -203,9 +205,8 @@ class Editor {
   }
 
   getHTML(index: number, length: number): string {
-    console.log("getHTML", index, length);
+    console.log("core-editor-getHTML");
     const [line, lineOffset] = this.scroll.line(index);
-    console.log("getHTML: ", line, lineOffset);
     if (line) {
       if (line.length() >= lineOffset + length) {
         return convertHTML(line, lineOffset, length, true);
@@ -216,7 +217,7 @@ class Editor {
   }
 
   getText(index: number, length: number): string {
-    console.log("getText", index, length);
+    console.log("core-editor-getText");
     return this.getContents(index, length)
       .filter(op => typeof op.insert === 'string')
       .map(op => op.insert)
@@ -224,7 +225,7 @@ class Editor {
   }
 
   insertContents(index: number, contents: Delta): Delta {
-    console.log("insertContents", index, contents);
+    console.log("core-editor-insertContents");
     const normalizedDelta = normalizeDelta(contents);
     const change = new Delta().retain(index).concat(normalizedDelta);
     this.scroll.insertContents(index, normalizedDelta);
@@ -232,7 +233,7 @@ class Editor {
   }
 
   insertEmbed(index: number, embed: string, value: unknown): Delta {
-    console.log("insertEmbed", index, embed, value);
+    console.log("core-editor-insertEmbed");
     this.scroll.insertAt(index, embed, value);
     return this.update(new Delta().retain(index).insert({ [embed]: value }));
   }
@@ -242,7 +243,7 @@ class Editor {
     text: string,
     formats: Record<string, unknown> = {},
   ): Delta {
-    console.log("insert Text", index, text, formats);
+    console.log("core-editor-insertText");
     text = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
     this.scroll.insertAt(index, text);
     Object.keys(formats).forEach(format => {
@@ -264,7 +265,7 @@ class Editor {
   }
 
   removeFormat(index: number, length: number): Delta {
-    console.log("removeFormat", index, length);
+    console.log("core-editor-removeFormat");
     const text = this.getText(index, length);
     const [line, offset] = this.scroll.line(index + length);
     let suffixLength = 0;
@@ -287,7 +288,7 @@ class Editor {
     mutations: MutationRecord[] = [],
     selectionInfo: SelectionInfo | undefined = undefined,
   ): Delta {
-    console.log("update editor", change, mutations, selectionInfo);
+    console.log("core-editor-update");
     const oldDelta = this.delta;
     if (
       mutations.length === 1 &&
@@ -331,7 +332,7 @@ class Editor {
 }
 
 function convertListHTML(items, lastIndent, types) {
-  console.log("convertListHTML", items, lastIndent, types);
+  console.log("core-editor-convertListHTML");
   if (items.length === 0) {
     const [endTag] = getListType(types.pop());
     if (lastIndent <= 0) {
@@ -365,7 +366,7 @@ function convertListHTML(items, lastIndent, types) {
 }
 
 function convertHTML(blot, index, length, isRoot = false) {
-  console.log('convertHTML', blot, index, length, isRoot)
+  console.log("core-editor-convertHTML");
   if (typeof blot.html === 'function') {
     return blot.html(index, length);
   }
@@ -407,6 +408,7 @@ function convertHTML(blot, index, length, isRoot = false) {
 }
 
 function combineFormats(formats, combined) {
+  console.log("core-editor-combineFormats");
   return Object.keys(combined).reduce((merged, name) => {
     if (formats[name] == null) return merged;
     if (combined[name] === formats[name]) {
@@ -426,7 +428,7 @@ function combineFormats(formats, combined) {
 }
 
 function getListType(type) {
-  console.log("getListType", type);
+  console.log("core-editor-getListType");
   const tag = type === 'ordered' ? 'ol' : 'ul';
   switch (type) {
     case 'checked':
@@ -439,7 +441,7 @@ function getListType(type) {
 }
 
 function normalizeDelta(delta: Delta) {
-  console.log("normalizeDelta", delta);
+  console.log("core-editor-normalizeDelta");
   return delta.reduce((normalizedDelta, op) => {
     if (typeof op.insert === 'string') {
       const text = op.insert.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
@@ -450,12 +452,12 @@ function normalizeDelta(delta: Delta) {
 }
 
 function shiftRange({ index, length }: Range, amount: number) {
-  console.log("shiftRange", index,length, amount);
+  console.log("core-editor-shiftRange");
   return new Range(index + amount, length);
 }
 
 function splitOpLines(ops: Op[]) {
-  console.log("splitOpLines", ops)
+  console.log("core-editor-splitOpLines");
   const split: Op[] = [];
   ops.forEach(op => {
     if (typeof op.insert === 'string') {
