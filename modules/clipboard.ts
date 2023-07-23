@@ -87,11 +87,11 @@ class Clipboard extends Module<ClipboardOptions> {
         this.addMatcher(selector, matcher);
       },
     );
-    console.log("modules-quill-constructor")
+    console.log("modules-clipboard-constructor")
   }
 
   addMatcher(selector: Selector, matcher: Matcher) {
-    console.log("modules-quill-addMatcher")
+    console.log("modules-clipboard-addMatcher")
     this.matchers.push([selector, matcher]);
   }
 
@@ -99,7 +99,7 @@ class Clipboard extends Module<ClipboardOptions> {
     { html, text }: { html?: string; text?: string },
     formats: Record<string, unknown> = {},
   ) {
-    console.log("modules-quill-convert")
+    console.log("modules-clipboard-convert")
     if (formats[CodeBlock.blotName]) {
       return new Delta().insert(text || '', {
         [CodeBlock.blotName]: formats[CodeBlock.blotName],
@@ -120,7 +120,7 @@ class Clipboard extends Module<ClipboardOptions> {
   }
 
   convertHTML(html: string) {
-    console.log("modules-quill-convertHTML")
+    console.log("modules-clipboard-convertHTML")
     const doc = new DOMParser().parseFromString(html, 'text/html');
     const container = doc.body;
     const nodeMatches = new WeakMap();
@@ -148,7 +148,7 @@ class Clipboard extends Module<ClipboardOptions> {
     html?: string,
     source: EmitterSource = Quill.sources.API,
   ) {
-    console.log("modules-quill-dangerouslyPasteHTML")
+    console.log("modules-clipboard-dangerouslyPasteHTML")
     if (typeof index === 'string') {
       const delta = this.convert({ html: index, text: '' });
       // @ts-expect-error
@@ -228,7 +228,7 @@ class Clipboard extends Module<ClipboardOptions> {
   }
 
   prepareMatching(container: Element, nodeMatches: WeakMap<Node, Matcher[]>) {
-    console.log("modules-quill-prepareMatching")
+    console.log("modules-clipboard-prepareMatching")
     const elementMatchers: Matcher[] = [];
     const textMatchers: Matcher[] = [];
     this.matchers.forEach(pair => {
@@ -266,7 +266,7 @@ function applyFormat(
   format: string | Record<string, unknown>,
   value?: unknown,
 ): Delta {
-  console.log("modules-quill-applyFormat")
+  console.log("modules-clipboard-applyFormat")
   if (typeof format === 'object') {
     return Object.keys(format).reduce((newDelta, key) => {
       return applyFormat(newDelta, key, format[key]);
@@ -283,7 +283,7 @@ function applyFormat(
 }
 
 function deltaEndsWith(delta: Delta, text: string) {
-  console.log("modules-quill-deltaEndsWith")
+  console.log("modules-clipboard-deltaEndsWith")
   let endText = '';
   for (
     let i = delta.ops.length - 1;
@@ -298,7 +298,7 @@ function deltaEndsWith(delta: Delta, text: string) {
 }
 
 function isLine(node: Element) {
-  console.log("modules-quill-isLine")
+  console.log("modules-clipboard-isLine")
   if (node.childNodes.length === 0) return false; // Exclude embed blocks
   return [
     'address',
@@ -359,7 +359,7 @@ function traverse(
   textMatchers: Matcher[],
   nodeMatches: WeakMap<Node, Matcher[]>,
 ) {
-  console.log("modules-quill-traverse")
+  console.log("modules-clipboard-traverse")
   // Post-order
   if (node.nodeType === node.TEXT_NODE) {
     return textMatchers.reduce((delta: Delta, matcher) => {
@@ -397,7 +397,7 @@ function matchAlias(format: string, node: Element, delta: Delta) {
 }
 
 function matchAttributor(node: HTMLElement, delta: Delta, scroll: ScrollBlot) {
-  console.log("modules-quill-matchAttributor")
+  console.log("modules-clipboard-matchAttributor", node, delta, scroll);
   const attributes = Attributor.keys(node);
   const classes = ClassAttributor.keys(node);
   const styles = StyleAttributor.keys(node);
@@ -428,7 +428,7 @@ function matchAttributor(node: HTMLElement, delta: Delta, scroll: ScrollBlot) {
 }
 
 function matchBlot(node: Node, delta: Delta, scroll: ScrollBlot) {
-  console.log("modules-quill-matchBlot")
+  console.log("modules-clipboard-matchBlot", node, delta, scroll)
   const match = scroll.query(node);
   if (match == null) return delta;
   // @ts-expect-error
@@ -457,7 +457,7 @@ function matchBlot(node: Node, delta: Delta, scroll: ScrollBlot) {
 }
 
 function matchBreak(node: Node, delta: Delta) {
-  console.log("modules-quill-matchBreak")
+  console.log("modules-clipboard-matchBreak", node, delta)
   if (!deltaEndsWith(delta, '\n')) {
     delta.insert('\n');
   }
@@ -465,6 +465,7 @@ function matchBreak(node: Node, delta: Delta) {
 }
 
 function matchCodeBlock(node, delta, scroll) {
+  console.log("modules-clipboard-matchCodeBlock", node, delta);
   const match = scroll.query('code-block');
   const language = match ? match.formats(node, scroll) : true;
   return applyFormat(delta, 'code-block', language);
@@ -475,6 +476,7 @@ function matchIgnore() {
 }
 
 function matchIndent(node: Node, delta: Delta, scroll: ScrollBlot) {
+  console.log("modules-clipboard-matchIndent", node, delta);
   const match = scroll.query(node);
   if (
     match == null ||
@@ -510,6 +512,7 @@ function matchList(node: Node, delta: Delta) {
 }
 
 function matchNewline(node: Node, delta: Delta, scroll: ScrollBlot) {
+  console.log("modules-clipboard-matchNewline", node, delta);
   if (!deltaEndsWith(delta, '\n')) {
     // @ts-expect-error
     if (isLine(node)) {
@@ -535,6 +538,7 @@ function matchNewline(node: Node, delta: Delta, scroll: ScrollBlot) {
 }
 
 function matchStyles(node: HTMLElement, delta: Delta) {
+  console.log("modules-clipboard-matchStyles", node, delta);
   const formats: Record<string, unknown> = {};
   const style: Partial<CSSStyleDeclaration> = node.style || {};
   if (style.fontStyle === 'italic') {
@@ -575,6 +579,7 @@ function matchTable(node, delta) {
 }
 
 function matchText(node, delta) {
+  console.log("modules-clipboard-marchText", node, delta);
   let text = node.data;
   // Word represents empty line with <o:p>&nbsp;</o:p>
   if (node.parentNode.tagName === 'O:P') {
