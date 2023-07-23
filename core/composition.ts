@@ -24,6 +24,7 @@ class Composition {
   }
 
   private handleCompositionStart(event: CompositionEvent) {
+    console.log("core-composition-handleCompositionStart", event);
     const blot =
       event.target instanceof Node
         ? this.scroll.find(event.target, true)
@@ -38,6 +39,7 @@ class Composition {
   }
 
   private handleCompositionEnd(event: CompositionEvent) {
+    console.log("core-composition-handleCompositinEnd", event);
     this.emitter.emit(Emitter.events.COMPOSITION_BEFORE_END, event);
     this.scroll.batchEnd();
     this.emitter.emit(Emitter.events.COMPOSITION_END, event);
