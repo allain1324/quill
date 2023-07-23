@@ -69,6 +69,7 @@ class Toolbar extends Module<ToolbarProps> {
   }
 
   attach(input: HTMLElement) {
+    console.log("modules-toolbar-attach", input);
     let format = Array.from(input.classList).find(className => {
       return className.indexOf('ql-') === 0;
     });
@@ -138,6 +139,7 @@ class Toolbar extends Module<ToolbarProps> {
   }
 
   update(range) {
+    console.log("modules-toolbar-update", range);
     const formats = range == null ? {} : this.quill.getFormat(range);
     this.controls.forEach(pair => {
       const [format, input] = pair;
@@ -182,6 +184,7 @@ class Toolbar extends Module<ToolbarProps> {
 Toolbar.DEFAULTS = {};
 
 function addButton(container: HTMLElement, format: string, value?: unknown) {
+  console.log("modules-toolbar-addButton", container, format, value);
   const input = document.createElement('button');
   input.setAttribute('type', 'button');
   input.classList.add(`ql-${format}`);
@@ -193,6 +196,7 @@ function addButton(container: HTMLElement, format: string, value?: unknown) {
 }
 
 function addControls(container: HTMLElement, groups: string[][]) {
+  console.log("modules-toolbar-addButton", container, groups);
   if (!Array.isArray(groups[0])) {
     // @ts-expect-error
     groups = [groups];
@@ -218,6 +222,7 @@ function addControls(container: HTMLElement, groups: string[][]) {
 }
 
 function addSelect(container, format, values) {
+  console.log("modules-toolbar-addSelect", container, format, values);
   const input = document.createElement('select');
   input.classList.add(`ql-${format}`);
   values.forEach(value => {
