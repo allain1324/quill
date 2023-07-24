@@ -62,12 +62,14 @@ class Scroll extends ScrollBlot {
 
   batchStart() {
     if (!Array.isArray(this.batch)) {
+      console.log("blot-scroll-batchStart", this.batch);
       this.batch = [];
     }
   }
 
   batchEnd() {
     if (!this.batch) return;
+    console.log("blot-scroll-batchEnd", this.batch);
     const mutations = this.batch;
     this.batch = false;
     this.update(mutations);
