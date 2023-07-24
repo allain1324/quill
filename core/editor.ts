@@ -323,6 +323,7 @@ class Editor {
       this.delta = oldDelta.compose(change);
     } else {
       this.delta = this.getDelta();
+      console.log("core-editor-this.delta", this.delta);
       if (!change || !isEqual(oldDelta.compose(change), this.delta)) {
         change = oldDelta.diff(this.delta, selectionInfo);
       }
