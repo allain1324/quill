@@ -49,6 +49,7 @@ class Picker {
   }
 
   buildItem(option: HTMLOptionElement) {
+    console.log("ui-picker-buildItem", option);
     const item = document.createElement('span');
     // @ts-expect-error
     item.tabIndex = '0';
@@ -94,8 +95,10 @@ class Picker {
   }
 
   buildOptions() {
+
     const options = document.createElement('span');
     options.classList.add('ql-picker-options');
+    console.log("ui-picker-buildOptions", options);
 
     // Don't want screen readers to read this until options are visible
     options.setAttribute('aria-hidden', 'true');
@@ -127,6 +130,7 @@ class Picker {
     this.container.classList.add('ql-picker');
     this.label = this.buildLabel();
     this.buildOptions();
+    console.log("ui-picker-buildPicker", this.label);
   }
 
   escape() {
@@ -146,6 +150,7 @@ class Picker {
 
   selectItem(item: HTMLElement | null, trigger = false) {
     const selected = this.container.querySelector('.ql-selected');
+    console.log("ui-picker-selectItem", selected);
     if (item === selected) return;
     if (selected != null) {
       selected.classList.remove('ql-selected');
