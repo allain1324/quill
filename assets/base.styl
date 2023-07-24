@@ -278,12 +278,22 @@ colorItemsPerRow = 7
     width: 98px
     .ql-picker-label::before,
     .ql-picker-item::before
-    for num in (1..100)
-      .ql-picker-label[data-value=\"{num}\"]::before,
-      .ql-picker-item[data-value=\"{num}\"]::before
-        content: num
-      .ql-picker-item[data-value=\"{num}\"]::before
-        font-size: 1em
+      content: 'Normal'
+    .ql-picker-label[data-value=small]::before,
+    .ql-picker-item[data-value=small]::before
+      content: 'Small'
+    .ql-picker-label[data-value=large]::before,
+    .ql-picker-item[data-value=large]::before
+      content: 'Large'
+    .ql-picker-label[data-value=huge]::before,
+    .ql-picker-item[data-value=huge]::before
+      content: 'Huge'
+    .ql-picker-item[data-value=small]::before
+      font-size: 10px
+    .ql-picker-item[data-value=large]::before
+      font-size: 18px
+    .ql-picker-item[data-value=huge]::before
+      font-size: 32px
 
   .ql-color-picker.ql-background
     .ql-picker-item
