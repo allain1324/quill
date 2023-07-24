@@ -116,7 +116,7 @@ resets(arr)
   for num in (1..MAX_INDENT)
     // Styles for ordered lists
     li[data-list="ordered"].ql-indent-{num}
-      counter-increment: unquote('list-' + num)
+      counter-increment: num
       > .ql-ui:before
         content: unquote('counter(list-' + num + ', ' + LIST_STYLE[num % 3] + ')') '. '
 
