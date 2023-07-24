@@ -327,6 +327,7 @@ class Editor {
         change = oldDelta.diff(this.delta, selectionInfo);
       }
     }
+    console.log("core-editor-update1", change);
     return change;
   }
 }
