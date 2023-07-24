@@ -110,6 +110,10 @@ resets(arr)
     counter-increment: list-0
     > .ql-ui:before
       content: unquote('counter(list-0, ' + LIST_STYLE[0] + ')') '. '
+  li[data-list=bullet]
+    counter-increment: list-0
+    > .ql-ui:before
+      content: ' '
   for num in (1..MAX_INDENT)
     li[data-list=ordered].ql-indent-{num}
       counter-increment: unquote('list-' + num)
