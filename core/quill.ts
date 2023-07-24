@@ -194,7 +194,7 @@ class Quill {
     // debug.log("uploader", this.uploader);
     // debug.log("theme", this.theme);
     this.emitter.on(Emitter.events.EDITOR_CHANGE, type => {
-      debug.log("editor changed 123", type);
+      console.log("core-quill-on-EDITOR_CHANGE", type);
       if (type === Emitter.events.TEXT_CHANGE) {
         this.root.classList.toggle('ql-blank', this.editor.isBlank());
       }
@@ -204,7 +204,7 @@ class Quill {
       const [newRange] = this.selection.getRange();
       const selectionInfo =
         oldRange && newRange ? { oldRange, newRange } : undefined;
-      console.log("quill--Emitter.events.SCROLL_UPDATE", source, mutations);
+      console.log("core-quill-on-SCROLL_UPDATE", source, mutations);
       modify.call(
         this,
         () => this.editor.update(null, mutations, selectionInfo),
@@ -212,6 +212,7 @@ class Quill {
       );
     });
     this.emitter.on(Emitter.events.SCROLL_EMBED_UPDATE, (blot, delta) => {
+      console.log("core-quill-on-SCROLL_EMBED_UPDATE", blot, delta);
       const oldRange = this.selection.lastRange;
       const [newRange] = this.selection.getRange();
       const selectionInfo =
@@ -228,7 +229,7 @@ class Quill {
       );
     });
     if (html) {
-      console.log("before convert", html);
+      console.log("core-quill-ifhtml", html);
       const contents = this.clipboard.convert({
         html: `${html}<p><br></p>`,
         text: '\n',
@@ -491,6 +492,7 @@ class Quill {
     index: { index: number; length: number } | number = 0,
     length = Number.MAX_VALUE,
   ): (Block | BlockEmbed)[] {
+    console.log("core-quill-getLines", index, length);
     if (typeof index !== 'number') {
       return this.scroll.lines(index.index, index.length);
     }
@@ -504,6 +506,7 @@ class Quill {
   getSelection(focus: true): Range;
   getSelection(focus?: boolean): Range | null;
   getSelection(focus = false): Range | null {
+    console.log("core-quill-getSelection", focus);
     if (focus) this.focus();
     this.update(); // Make sure we access getRange with editor in consistent state
     return this.selection.getRange()[0];
@@ -530,6 +533,7 @@ class Quill {
     index: { index: number; length: number } | number = 0,
     length?: number,
   ): string {
+    console.log("core-quill-getText", index);
     if (typeof index === 'number') {
       length = this.getLength() - index;
     }
