@@ -266,6 +266,7 @@ class Scroll extends ScrollBlot {
           lengthLeft -= childLength;
         },
       );
+      console.log("blots-scroll-lines", lines);
       return lines;
     };
     return getLines(this, index, length);
