@@ -113,7 +113,7 @@ resets(arr)
   li[data-list=bullet]:before
       content: ' '
   for num in (1..MAX_INDENT)
-    li[data-list=ordered].ql-indent-{num}
+    li[data-list=ordered]:not([data-list=bullet]).ql-indent-{num}
       counter-increment: unquote('list-' + num)
       > .ql-ui:before
         content: unquote('counter(list-' + num + ', ' + LIST_STYLE[num%3] + ')') '. '
