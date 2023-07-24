@@ -100,7 +100,7 @@ resets(arr)
   li[data-list=unchecked] > .ql-ui:before
     content: '\2610'
 
-  li[data-list]:not([data-list="bullet"])
+  li[data-list]
     @supports (counter-set: none)
       counter-set: resets(1..MAX_INDENT)
     @supports not (counter-set: none)
@@ -110,9 +110,6 @@ resets(arr)
     counter-increment: list-0
     > .ql-ui:before
       content: unquote('counter(list-0, ' + LIST_STYLE[0] + ')') '. '
-  li[data-list=bullet]:before
-      content: ''
-      
   for num in (1..MAX_INDENT)
     li[data-list=ordered].ql-indent-{num}
       counter-increment: unquote('list-' + num)
