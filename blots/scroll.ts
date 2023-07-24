@@ -293,7 +293,7 @@ class Scroll extends ScrollBlot {
   update(source?: EmitterSource): void;
   update(mutations?: MutationRecord[]): void;
   update(mutations?: MutationRecord[] | EmitterSource): void {
-    console.log("scroll update");
+    console.log("blots-scroll-update1", mutations);
     if (this.batch) {
       if (Array.isArray(mutations)) {
         this.batch = this.batch.concat(mutations);
@@ -301,6 +301,7 @@ class Scroll extends ScrollBlot {
       return;
     }
     let source: EmitterSource = Emitter.sources.USER;
+    console.log("blots-scroll-update2", source);
     if (typeof mutations === 'string') {
       source = mutations;
     }
