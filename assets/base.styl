@@ -282,7 +282,7 @@ colorItemsPerRow = 7
     for num in (1..100)
       .ql-picker-label[data-value=\"{num}\"]::before,
       .ql-picker-item[data-value=\"{num}\"]::before
-        content: num
+        content: '' + num
       .ql-picker-item[data-value=\"{num}\"]::before
         font-size: 10px
 
