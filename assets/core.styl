@@ -109,7 +109,7 @@ resets(arr)
   li[data-list=ordered]
     counter-increment: list-0
     > .ql-ui:before
-      content: unquote('counter(list-0, ' + LIST_STYLE[0] + ')') '. '
+      content: ''
   li[data-list=bullet]:before
       content: ' '
   for num in (1..MAX_INDENT)
