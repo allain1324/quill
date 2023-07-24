@@ -314,10 +314,12 @@ class Scroll extends ScrollBlot {
       const blot = this.find(target, true);
       return blot && !isUpdatable(blot);
     });
+    console.log("blots-scroll-update2", mutations);
     if (mutations.length > 0) {
       this.emitter.emit(Emitter.events.SCROLL_BEFORE_UPDATE, source, mutations);
     }
     super.update(mutations.concat([])); // pass copy
+    console.log("blots-scroll-update3", mutations);
     if (mutations.length > 0) {
       this.emitter.emit(Emitter.events.SCROLL_UPDATE, source, mutations);
     }
