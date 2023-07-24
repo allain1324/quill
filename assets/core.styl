@@ -1,4 +1,5 @@
 // Styles necessary for Quill
+@import 'function';
 
 LIST_STYLE = decimal lower-alpha lower-roman
 LIST_STYLE_WIDTH = 1.2em
@@ -192,7 +193,7 @@ resets(arr)
 
   for num in (1..100)
     .ql-size-{num}
-      font-size: num * (4 / 3)px
+      font-size: ptToPx(num)
 
   .ql-direction-rtl
     direction: rtl
