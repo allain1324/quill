@@ -111,7 +111,7 @@ resets(arr)
     > .ql-ui:before
       content: unquote('counter(list-0, ' + LIST_STYLE[0] + ')') '. '
   li[data-list=bullet]:before
-      content: ' ' !important
+      content: ' '
   for num in (1..MAX_INDENT)
     li[data-list=ordered].ql-indent-{num}
       counter-increment: unquote('list-' + num)
@@ -129,11 +129,11 @@ resets(arr)
     .ql-indent-{num}:not(.ql-direction-rtl)
       padding-left: (36*num)pt
     li.ql-indent-{num}:not(.ql-direction-rtl)
-      padding-left: (36*num)pt !important
+      padding-left: (36*num)pt
     .ql-indent-{num}.ql-direction-rtl.ql-align-right
       padding-right: (36*num)pt
     li.ql-indent-{num}.ql-direction-rtl.ql-align-right
-      padding-right: (36*num)pt !important
+      padding-right: (36*num)pt
 
   li.ql-direction-rtl
     padding-right: LIST_STYLE_OUTER_WIDTH
