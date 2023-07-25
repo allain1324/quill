@@ -127,13 +127,13 @@ resets(arr)
 
   for num in (1..MAX_INDENT)
     .ql-indent-{num}:not(.ql-direction-rtl)
-      padding-left: (3*num)em
+      padding-left: (36*num)pt
     li.ql-indent-{num}:not(.ql-direction-rtl)
-      padding-left: (3*num + LIST_STYLE_OUTER_WIDTH)em
+      padding-left: (36*num + LIST_STYLE_OUTER_WIDTH)pt
     .ql-indent-{num}.ql-direction-rtl.ql-align-right
-      padding-right: (3*num)em
+      padding-right: (36*num)pt
     li.ql-indent-{num}.ql-direction-rtl.ql-align-right
-      padding-right: (3*num + LIST_STYLE_OUTER_WIDTH)em
+      padding-right: (36*num + LIST_STYLE_OUTER_WIDTH)pt
 
   li.ql-direction-rtl
     padding-right: LIST_STYLE_OUTER_WIDTH
@@ -196,7 +196,7 @@ resets(arr)
 
   for num in (1..100)
     .ql-size-{num}
-      font-size: unquote('' + num + 'pt')
+      font-size: (num)pt
 
 
   .ql-direction-rtl
