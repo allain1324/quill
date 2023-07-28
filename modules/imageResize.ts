@@ -15,13 +15,10 @@ class ImageResize extends Module {
 
   constructor(quill: Quill) {
     super(quill);
-    this.quill.root.addEventListener("click", this.handleClick, false);
-    this.parentNode = this.quill.root.parentNode as HTMLElement;
-    this.parentNode.style.position =
-      this.parentNode.style.position || "relative";
+    this.quill.root.addEventListener('click', this.handleClick, false);
   }
 
-  handleClick(event: MouseEvent): void {
+  handleClick = (event: MouseEvent):void => {
     const target = event.target ? (event.target as HTMLElement) : null;
     console.log("target", target);
     if (this.media === target) {
@@ -35,25 +32,25 @@ class ImageResize extends Module {
     }
   }
 
-  show(media: HTMLImageElement) {
+  show = (media: HTMLImageElement) => {
     this.media = media;
     this.showOverlay();
     this.showCorners();
-  }
+  };
 
-  hide() {
+  hide = () => {
     this.media = undefined;
     this.hideOverlay();
-  }
+  };
 
-  showCorners(){
+  showCorners = () => {
     this.addCorner("nwse-resize", { left: "-6px", top: "-6px" });
     this.addCorner("nesw-resize", { right: "-6px", top: "-6px" });
     this.addCorner("nwse-resize", { right: "-6px", bottom: "-6px" });
     this.addCorner("nesw-resize", { left: "-6px", bottom: "-6px" });
-  }
+  };
 
-  addCorner(cursor: string, positions: { [key: string]: string }) {
+  addCorner = (cursor: string, positions: { [key: string]: string }) => {
     const corner = document.createElement("div");
     Object.assign(corner.style, {
       position: "absolute",
@@ -69,24 +66,24 @@ class ImageResize extends Module {
     corner.addEventListener("mousedown", this.handleMousedown, false);
     this.overlay?.appendChild(corner);
     this.corners.push(corner);
-  }
+  };
 
-  handleMousedown(event: MouseEvent) {
+  handleMousedown = (event: MouseEvent) => {
     this.dragCorner = event.target as HTMLDivElement;
     this.dragStartX = event.clientX;
     this.preDragWidth = this.media?.width || this.media?.naturalWidth || 0;
     this.setCursor(this.dragCorner.style.cursor);
     document.addEventListener("mousemove", this.handleDrag, false);
     document.addEventListener("mouseup", this.handleMouseup, false);
-  }
+  };
 
-  handleMouseup() {
+  handleMouseup = () => {
     this.setCursor("");
     document.removeEventListener("mousemove", this.handleDrag);
     document.removeEventListener("mouseup", this.handleMouseup);
-  }
+  };
 
-  handleDrag(event: MouseEvent) {
+  handleDrag = (event: MouseEvent) => {
     if (!this.media) {
       // image not set yet
       return;
@@ -102,9 +99,9 @@ class ImageResize extends Module {
       this.media.width = Math.round(this.preDragWidth + deltaX);
     }
     this.repositionElements();
-  }
+  };
 
-  showOverlay() {
+  showOverlay = () => {
     this.hideOverlay();
     this.quill.setSelection(0, 0);
     this.setUserSelect("none");
@@ -117,38 +114,38 @@ class ImageResize extends Module {
     });
     this.parentNode.appendChild(this.overlay);
     this.repositionElements();
-  }
+  };
 
-  hideOverlay() {
+  hideOverlay = () => {
     if (this.overlay) {
       this.parentNode.removeChild(this.overlay);
       this.overlay = undefined;
       this.setUserSelect("");
     }
-  }
+  };
 
-  setUserSelect(value: string) {
+  setUserSelect = (value: string) => {
     ["userSelect", "mozUserSelect", "webkitUserSelect", "msUserSelect"].forEach(
       (prop) => {
         this.quill.root.style[<any>prop] = value;
         document.documentElement.style[<any>prop] = value;
       }
     );
-  }
+  };
 
-  onKeyUp(event: KeyboardEvent) {
+  onKeyUp = (event: KeyboardEvent) => {
     if (this.media) {
       if (
         typeof window !== "undefined" &&
         ["delete", "backspace", "delete"].includes(event.key.toLowerCase())
       ) {
-        // this.quill.root.find(this.media).deleteAt(0);
+        // this.quill.find(this.media).deleteAt(0);
       }
       this.hide();
     }
-  }
+  };
 
-  repositionElements() {
+  repositionElements = () => {
     if (!this.overlay || !this.media) {
       return;
     }
@@ -164,15 +161,15 @@ class ImageResize extends Module {
       width: `${mediaRect.width + 2}px`,
       height: `${mediaRect.height + 1}px`,
     });
-  }
+  };
 
-  setCursor(value: string) {
+  setCursor = (value: string) => {
     [document.body, this.media].forEach((el) => {
       if (el) {
         el.style.cursor = value;
       }
     });
-  }
+  };
 }
 
 export default ImageResize;
