@@ -3,7 +3,7 @@
 # Xóa những file có đuôi theo chỉ định
 
 file_extensions=".ts .d.ts .js.map"  # Định nghĩa các đuôi file cần xóa
-folders=("blots" "core"  "formats" "modules" "test" "themes" "ui")  # Định nghĩa các thư mục cần xóa trong
+folders=("blots" "core"  "formats" "modules" "test" "themes" "ui" ".git")  # Định nghĩa các thư mục cần xóa trong
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"  # Đường dẫn thư mục chứa script
 
 # Hàm đệ quy để xóa tệp có đuôi chỉ định
