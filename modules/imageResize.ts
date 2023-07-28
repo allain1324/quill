@@ -39,19 +39,19 @@ class ImageResize extends Module {
     this.media = media;
     this.showOverlay();
     this.showCorners();
-  };
+  }
 
   hide() {
     this.media = undefined;
     this.hideOverlay();
-  };
+  }
 
   showCorners(){
     this.addCorner("nwse-resize", { left: "-6px", top: "-6px" });
     this.addCorner("nesw-resize", { right: "-6px", top: "-6px" });
     this.addCorner("nwse-resize", { right: "-6px", bottom: "-6px" });
     this.addCorner("nesw-resize", { left: "-6px", bottom: "-6px" });
-  };
+  }
 
   addCorner(cursor: string, positions: { [key: string]: string }) {
     const corner = document.createElement("div");
@@ -69,7 +69,7 @@ class ImageResize extends Module {
     corner.addEventListener("mousedown", this.handleMousedown, false);
     this.overlay?.appendChild(corner);
     this.corners.push(corner);
-  };
+  }
 
   handleMousedown(event: MouseEvent) {
     this.dragCorner = event.target as HTMLDivElement;
@@ -78,13 +78,13 @@ class ImageResize extends Module {
     this.setCursor(this.dragCorner.style.cursor);
     document.addEventListener("mousemove", this.handleDrag, false);
     document.addEventListener("mouseup", this.handleMouseup, false);
-  };
+  }
 
   handleMouseup() {
     this.setCursor("");
     document.removeEventListener("mousemove", this.handleDrag);
     document.removeEventListener("mouseup", this.handleMouseup);
-  };
+  }
 
   handleDrag(event: MouseEvent) {
     if (!this.media) {
@@ -102,7 +102,7 @@ class ImageResize extends Module {
       this.media.width = Math.round(this.preDragWidth + deltaX);
     }
     this.repositionElements();
-  };
+  }
 
   showOverlay() {
     this.hideOverlay();
@@ -117,7 +117,7 @@ class ImageResize extends Module {
     });
     this.parentNode.appendChild(this.overlay);
     this.repositionElements();
-  };
+  }
 
   hideOverlay() {
     if (this.overlay) {
@@ -125,7 +125,7 @@ class ImageResize extends Module {
       this.overlay = undefined;
       this.setUserSelect("");
     }
-  };
+  }
 
   setUserSelect(value: string) {
     ["userSelect", "mozUserSelect", "webkitUserSelect", "msUserSelect"].forEach(
@@ -134,7 +134,7 @@ class ImageResize extends Module {
         document.documentElement.style[<any>prop] = value;
       }
     );
-  };
+  }
 
   onKeyUp(event: KeyboardEvent) {
     if (this.media) {
@@ -146,7 +146,7 @@ class ImageResize extends Module {
       }
       this.hide();
     }
-  };
+  }
 
   repositionElements() {
     if (!this.overlay || !this.media) {
@@ -164,7 +164,7 @@ class ImageResize extends Module {
       width: `${mediaRect.width + 2}px`,
       height: `${mediaRect.height + 1}px`,
     });
-  };
+  }
 
   setCursor(value: string) {
     [document.body, this.media].forEach((el) => {
@@ -172,7 +172,7 @@ class ImageResize extends Module {
         el.style.cursor = value;
       }
     });
-  };
+  }
 }
 
 export default ImageResize;
