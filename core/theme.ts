@@ -1,6 +1,7 @@
 import Quill from '../core';
 import Clipboard from '../modules/clipboard';
 import History from '../modules/history';
+import ImageResize from '../modules/imageResize';
 import Keyboard from '../modules/keyboard';
 import Uploader from '../modules/uploader';
 
@@ -32,6 +33,7 @@ class Theme {
   addModule(name: 'clipboard'): Clipboard;
   addModule(name: 'keyboard'): Keyboard;
   addModule(name: 'uploader'): Uploader;
+  addModule(name: 'imageResize'): ImageResize;
   addModule(name: 'history'): History;
   addModule(name: string): unknown;
   addModule(name: string) {

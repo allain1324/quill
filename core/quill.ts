@@ -6,6 +6,7 @@ import Block, { BlockEmbed } from '../blots/block';
 import Scroll, { ScrollConstructor } from '../blots/scroll';
 import Clipboard from '../modules/clipboard';
 import History from '../modules/history';
+import ImageResize from '../modules/imageResize';
 import Keyboard from '../modules/keyboard';
 import Uploader from '../modules/uploader';
 import Editor from './editor';
@@ -143,6 +144,7 @@ class Quill {
   keyboard: Keyboard;
   clipboard: Clipboard;
   history: History;
+  imageResize: ImageResize;
   uploader: Uploader;
 
   options: ExpandedOptions;
