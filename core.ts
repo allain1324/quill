@@ -11,6 +11,7 @@ import TextBlot from './blots/text';
 
 import Clipboard from './modules/clipboard';
 import History from './modules/history';
+import ImageResize from './modules/imageResize';
 import Keyboard from './modules/keyboard';
 import Uploader from './modules/uploader';
 import Delta, { Op, OpIterator, AttributeMap } from 'quill-delta';
@@ -31,6 +32,7 @@ Quill.register({
 
   'modules/clipboard': Clipboard,
   'modules/history': History,
+  'modules/imageResize': ImageResize,
   'modules/keyboard': Keyboard,
   'modules/uploader': Uploader,
   'modules/input': Input,
