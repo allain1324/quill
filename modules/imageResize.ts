@@ -15,7 +15,10 @@ class ImageResize extends Module {
 
   constructor(quill: Quill) {
     super(quill);
-    this.quill.root.addEventListener('click', this.handleClick, false);
+    this.quill.root.addEventListener("click", this.handleClick, false);
+    this.parentNode = this.quill.root.parentNode as HTMLElement;
+    this.parentNode.style.position =
+      this.parentNode.style.position || "relative";
   }
 
   handleClick(event: MouseEvent): void {
@@ -32,25 +35,25 @@ class ImageResize extends Module {
     }
   }
 
-  show = (media: HTMLImageElement) => {
+  show(media: HTMLImageElement) {
     this.media = media;
     this.showOverlay();
     this.showCorners();
   };
 
-  hide = () => {
+  hide() {
     this.media = undefined;
     this.hideOverlay();
   };
 
-  showCorners = () => {
+  showCorners(){
     this.addCorner("nwse-resize", { left: "-6px", top: "-6px" });
     this.addCorner("nesw-resize", { right: "-6px", top: "-6px" });
     this.addCorner("nwse-resize", { right: "-6px", bottom: "-6px" });
     this.addCorner("nesw-resize", { left: "-6px", bottom: "-6px" });
   };
 
-  addCorner = (cursor: string, positions: { [key: string]: string }) => {
+  addCorner(cursor: string, positions: { [key: string]: string }) {
     const corner = document.createElement("div");
     Object.assign(corner.style, {
       position: "absolute",
@@ -68,7 +71,7 @@ class ImageResize extends Module {
     this.corners.push(corner);
   };
 
-  handleMousedown = (event: MouseEvent) => {
+  handleMousedown(event: MouseEvent) {
     this.dragCorner = event.target as HTMLDivElement;
     this.dragStartX = event.clientX;
     this.preDragWidth = this.media?.width || this.media?.naturalWidth || 0;
@@ -77,13 +80,13 @@ class ImageResize extends Module {
     document.addEventListener("mouseup", this.handleMouseup, false);
   };
 
-  handleMouseup = () => {
+  handleMouseup() {
     this.setCursor("");
     document.removeEventListener("mousemove", this.handleDrag);
     document.removeEventListener("mouseup", this.handleMouseup);
   };
 
-  handleDrag = (event: MouseEvent) => {
+  handleDrag(event: MouseEvent) {
     if (!this.media) {
       // image not set yet
       return;
@@ -101,7 +104,7 @@ class ImageResize extends Module {
     this.repositionElements();
   };
 
-  showOverlay = () => {
+  showOverlay() {
     this.hideOverlay();
     this.quill.setSelection(0, 0);
     this.setUserSelect("none");
@@ -116,7 +119,7 @@ class ImageResize extends Module {
     this.repositionElements();
   };
 
-  hideOverlay = () => {
+  hideOverlay() {
     if (this.overlay) {
       this.parentNode.removeChild(this.overlay);
       this.overlay = undefined;
@@ -124,7 +127,7 @@ class ImageResize extends Module {
     }
   };
 
-  setUserSelect = (value: string) => {
+  setUserSelect(value: string) {
     ["userSelect", "mozUserSelect", "webkitUserSelect", "msUserSelect"].forEach(
       (prop) => {
         this.quill.root.style[<any>prop] = value;
@@ -133,7 +136,7 @@ class ImageResize extends Module {
     );
   };
 
-  onKeyUp = (event: KeyboardEvent) => {
+  onKeyUp(event: KeyboardEvent) {
     if (this.media) {
       if (
         typeof window !== "undefined" &&
@@ -145,7 +148,7 @@ class ImageResize extends Module {
     }
   };
 
-  repositionElements = () => {
+  repositionElements() {
     if (!this.overlay || !this.media) {
       return;
     }
@@ -163,7 +166,7 @@ class ImageResize extends Module {
     });
   };
 
-  setCursor = (value: string) => {
+  setCursor(value: string) {
     [document.body, this.media].forEach((el) => {
       if (el) {
         el.style.cursor = value;
