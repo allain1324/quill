@@ -112,6 +112,7 @@ class ImageResize extends Module {
       boxSizing: "border-box",
       border: "1px dashed #444",
     });
+    console.log("overlayyyyy", this.overlay)
     this.parentNode.appendChild(this.overlay);
     this.repositionElements();
   };
