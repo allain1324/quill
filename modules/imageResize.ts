@@ -14,8 +14,12 @@ class ImageResize extends Module {
 
 
   constructor(quill: Quill) {
+    console.log("modules/imageResize", )
     super(quill);
     this.quill.root.addEventListener('click', this.handleClick, false);
+    this.parentNode = this.quill.root.parentNode as HTMLElement;
+    this.parentNode.style.position =
+      this.parentNode.style.position || "relative";
   }
 
   handleClick = (event: MouseEvent):void => {
