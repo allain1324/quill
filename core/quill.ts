@@ -182,6 +182,7 @@ class Quill {
     this.keyboard = this.theme.addModule('keyboard');
     this.clipboard = this.theme.addModule('clipboard');
     this.history = this.theme.addModule('history');
+    this.imageResize = this.theme.addModule('imageResize');
     this.uploader = this.theme.addModule('uploader');
     this.theme.addModule('input');
     this.theme.init();
