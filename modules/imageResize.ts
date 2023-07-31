@@ -50,8 +50,10 @@ class ImageResize extends Module {
   showCorners = () => {
     this.addCorner("nwse-resize", { left: "-6px", top: "-6px" });
     this.addCorner("nesw-resize", { right: "-6px", top: "-6px" });
+    this.addCorner("nwse-resize", { right: "-6px", top: "50%" });
     this.addCorner("nwse-resize", { right: "-6px", bottom: "-6px" });
     this.addCorner("nesw-resize", { left: "-6px", bottom: "-6px" });
+    this.addCorner("nesw-resize", { left: "-6px", bottom: "50%" });
   };
 
   addCorner = (cursor: string, positions: { [key: string]: string }) => {
