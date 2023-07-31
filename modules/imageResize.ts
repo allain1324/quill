@@ -14,7 +14,7 @@ class ImageResize extends Module {
 
 
   constructor(quill: Quill) {
-    console.log("modules/imageResize", )
+    console.log("modules/imageResize",)
     super(quill);
     this.quill.root.addEventListener('click', this.handleClick, false);
     this.parentNode = this.quill.root.parentNode as HTMLElement;
@@ -22,7 +22,7 @@ class ImageResize extends Module {
       this.parentNode.style.position || "relative";
   }
 
-  handleClick = (event: MouseEvent):void => {
+  handleClick = (event: MouseEvent): void => {
     const target = event.target ? (event.target as HTMLElement) : null;
     console.log("target", target);
     if (this.media === target) {
@@ -96,9 +96,9 @@ class ImageResize extends Module {
     }
     // update image size
     const deltaX = event.clientX - this.dragStartX;
-    console.log("handleDrag", this.dragCorner, this.dragCorner === this.corners[3])
-    if(this.dragCorner === this.corners[3]) {
-      console.log('detalX' , deltaX)
+    console.log("handleDrag", this.dragCorner, this.corners[3], this.dragCorner === this.corners[3])
+    if (this.dragCorner === this.corners[3]) {
+      console.log('detalX', deltaX)
       return;
     }
     if (
