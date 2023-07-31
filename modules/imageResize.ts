@@ -104,7 +104,8 @@ class ImageResize extends Module {
     if (this.dragCorner === this.corners[2] || this.dragCorner === this.corners[5]) {
       console.log('detalX', deltaX)
       this.media.width = Math.round(this.preDragWidth - deltaX);
-      // return;
+      this.repositionElements();
+      return;
     }
     if (
       this.dragCorner === this.corners[0] ||
