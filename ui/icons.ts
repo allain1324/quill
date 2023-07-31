@@ -15,6 +15,7 @@ import headerIcon from '../assets/icons/header.svg';
 import header2Icon from '../assets/icons/header-2.svg';
 import italicIcon from '../assets/icons/italic.svg';
 import imageIcon from '../assets/icons/image.svg';
+import figureIcon from '../assets/icons/photo-film.svg';
 import indentIcon from '../assets/icons/indent.svg';
 import outdentIcon from '../assets/icons/outdent.svg';
 import linkIcon from '../assets/icons/link.svg';
@@ -53,6 +54,7 @@ export default {
   },
   italic: italicIcon,
   image: imageIcon,
+  figure: figureIcon,
   indent: {
     '+1': indentIcon,
     '-1': outdentIcon,
