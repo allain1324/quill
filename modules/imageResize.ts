@@ -105,17 +105,18 @@ class ImageResize extends Module {
     console.log("preDragWidth", this.preDragWidth);
     console.log("dragStartX", this.dragStartX);
     if (this.dragCorner === this.corners[2] || this.dragCorner === this.corners[5]) {
-      
+      console.log("dragCorner1")
       this.media.width = Math.round(this.preDragWidth - deltaX);
       this.media.height = this.media.height;
-
     }
     else if (
       this.dragCorner === this.corners[0] ||
       this.dragCorner === this.corners[4]
     ) {
+      console.log("dragCorner2")
       this.media.width = Math.round(this.preDragWidth - deltaX);
     } else {
+      console.log("dragCorner3")
       this.media.width = Math.round(this.preDragWidth + deltaX);
     }
     this.repositionElements();
