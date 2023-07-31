@@ -101,12 +101,13 @@ class ImageResize extends Module {
     // update image size
     const deltaX = event.clientX - this.dragStartX;
     // console.log("handleDrag", this.dragCorner, this.corners, this.dragCorner === this.corners[3])
+    console.log('detalX', deltaX)
+    console.log("preDragWidth", this.preDragWidth);
+    console.log("dragStartX", this.dragStartX);
     if (this.dragCorner === this.corners[2] || this.dragCorner === this.corners[5]) {
-      console.log('detalX', deltaX)
-      console.log("preDragWidth", this.preDragWidth);
-      console.log("dragStartX", this.dragStartX);
+      
       this.media.width = Math.round(this.preDragWidth - deltaX);
-      this.media.height = 265;
+      this.media.height = this.media.height;
 
     }
     else if (
