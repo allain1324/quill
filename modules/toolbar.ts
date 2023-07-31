@@ -22,6 +22,7 @@ class Toolbar extends Module<ToolbarProps> {
 
   constructor(quill: Quill, options: Partial<ToolbarProps>) {
     super(quill, options);
+    console.log("modules-toolbar-constructor", options);
     if (Array.isArray(this.options.container)) {
       const container = document.createElement('div');
       addControls(container, this.options.container);
