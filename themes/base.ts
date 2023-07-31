@@ -215,7 +215,7 @@ BaseTheme.DEFAULTS = merge({}, Theme.DEFAULTS, {
               'accept',
               this.quill.uploader.options.mimetypes.join(', '),
             );
-            fileInput.classList.add('ql-image');
+            fileInput.classList.add('ql-figure');
             fileInput.addEventListener('change', () => {
               const range = this.quill.getSelection(true);
               this.quill.uploader.upload(range, fileInput.files);
