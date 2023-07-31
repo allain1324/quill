@@ -182,7 +182,7 @@ class ImageResize extends Module {
         }px`,
       top: `${mediaRect.top - containerRect.top + this.parentNode.scrollTop}px`,
       width: `${mediaRect.width + 2}px`,
-      height: `${mediaRect.height}px`,
+      height: `265px`,
     });
   };
 
