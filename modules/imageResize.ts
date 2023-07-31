@@ -100,25 +100,16 @@ class ImageResize extends Module {
       // image not set yet
       return;
     }
-    // update image size
+  
     const deltaX = event.clientX - this.dragStartX;
-
-    if (this.dragCorner === this.corners[2]) {
-      this.media.width = Math.round(this.preDragWidth + deltaX);
-      this.media.height = this.media.height;
-    }
-    else if (this.dragCorner === this.corners[5]) {
-      this.media.width = Math.round(this.preDragWidth - deltaX);
-      this.media.height = this.media.height;
-    }
-    else if (this.dragCorner === this.corners[0] || this.dragCorner === this.corners[4]) {
-      this.media.width = Math.round(this.preDragWidth - deltaX);
-      this.media.height = Math.round(this.preDragHeight - deltaX);
-    } 
-    else {
-      this.media.width = Math.round(this.preDragWidth + deltaX);
-      this.media.height = Math.round(this.preDragHeight + deltaX);
-    }
+    const isCornerDrag = this.dragCorner === this.corners[2] || this.dragCorner === this.corners[5];
+    const widthDelta = isCornerDrag ? deltaX : 2 * deltaX;
+    const heightDelta = this.dragCorner === this.corners[0] || this.dragCorner === this.corners[4]
+      ? widthDelta
+      : 2 * deltaX;
+  
+    this.media.width = Math.round(this.preDragWidth + widthDelta);
+    this.media.height = Math.round(this.preDragHeight + heightDelta);
     this.repositionElements();
   };
 
