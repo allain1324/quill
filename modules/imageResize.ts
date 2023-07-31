@@ -98,6 +98,7 @@ class ImageResize extends Module {
     const deltaX = event.clientX - this.dragStartX;
     if(this.dragCorner === this.corners[3]) {
       console.log('detalX' , deltaX)
+      return;
     }
     if (
       this.dragCorner === this.corners[0] ||
