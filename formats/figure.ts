@@ -1,4 +1,4 @@
-import { Block } from 'parchment';
+import Block from '../blots/block';
 
 class Figure extends Block {
   static blotName = 'figure';
