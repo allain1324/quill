@@ -569,6 +569,7 @@ function matchStyles(node: HTMLElement, delta: Delta) {
 }
 
 function matchTable(node, delta) {
+  console.log("modules-clipboard-matchTable", node, delta);
   const table =
     node.parentNode.tagName === 'TABLE'
       ? node.parentNode
