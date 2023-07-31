@@ -109,15 +109,15 @@ class ImageResize extends Module {
       this.repositionElements();
       return;
     }
-    if (
-      this.dragCorner === this.corners[0] ||
-      this.dragCorner === this.corners[4]
-    ) {
-      this.media.width = Math.round(this.preDragWidth - deltaX);
-    } else {
-      this.media.width = Math.round(this.preDragWidth + deltaX);
-    }
-    this.repositionElements();
+    // if (
+    //   this.dragCorner === this.corners[0] ||
+    //   this.dragCorner === this.corners[4]
+    // ) {
+    //   this.media.width = Math.round(this.preDragWidth - deltaX);
+    // } else {
+    //   this.media.width = Math.round(this.preDragWidth + deltaX);
+    // }
+    // this.repositionElements();
   };
 
   showOverlay = () => {
