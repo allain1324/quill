@@ -144,7 +144,8 @@ class ImageResize extends Module {
         typeof window !== "undefined" &&
         ["delete", "backspace", "delete"].includes(event.key.toLowerCase())
       ) {
-        Quill.find(this.media).deleteAt(0);
+        console.log("Quill find", Quill.find(this.media))
+        // Quill.find(this.media).deleteAt(0);
       }
       this.hide();
     }
