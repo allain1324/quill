@@ -1,6 +1,6 @@
-import { EmbedBlot } from 'parchment';
+import { Block } from 'parchment';
 
-class Figure extends EmbedBlot {
+class Figure extends Block {
   static blotName = 'figure';
   static tagName = 'FIGURE';
 

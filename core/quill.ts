@@ -710,7 +710,7 @@ class Quill {
     const delta = new Delta().insert(text);
     return this.setContents(delta, source);
   }
-
+Fv
   update(source: EmitterSource = Emitter.sources.USER) {
     console.log("core-quill-update");
     const change = this.scroll.update(source); // Will update selection before selection.update() does if text changes
