@@ -120,7 +120,8 @@ class ImageResize extends Module {
       console.log("dragCorner3")
       this.media.width = Math.round(this.preDragWidth + deltaX);
     }
-    // this.repositionElements();
+    console.log("handleDrag-media", this.media);
+    this.repositionElements();
   };
 
   showOverlay = () => {
