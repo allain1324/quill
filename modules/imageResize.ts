@@ -48,17 +48,16 @@ class ImageResize extends Module {
   };
 
   showCorners = () => {
-    this.addCorner("nwse-resize", { left: "-6px", top: "-6px" }, 'left-top');
-    this.addCorner("nesw-resize", { right: "-6px", top: "-6px" }, 'right-top');
-    this.addCorner("nwse-resize", { right: "-6px", top: "50%" }, 'center-right');
-    this.addCorner("nwse-resize", { right: "-6px", bottom: "-6px" }, 'right-bottom');
-    this.addCorner("nesw-resize", { left: "-6px", bottom: "-6px" }, 'left-bottom');
-    this.addCorner("nesw-resize", { left: "-6px", bottom: "50%" }, 'center-left');
+    this.addCorner("nwse-resize", { left: "-6px", top: "-6px" });
+    this.addCorner("nesw-resize", { right: "-6px", top: "-6px" });
+    this.addCorner("nwse-resize", { right: "-6px", top: "50%" });
+    this.addCorner("nwse-resize", { right: "-6px", bottom: "-6px" });
+    this.addCorner("nesw-resize", { left: "-6px", bottom: "-6px" });
+    this.addCorner("nesw-resize", { left: "-6px", bottom: "50%" });
   };
 
-  addCorner = (cursor: string, positions: { [key: string]: string }, position: string) => {
+  addCorner = (cursor: string, positions: { [key: string]: string }) => {
     const corner = document.createElement("div");
-    corner.setAttribute('position', position);
     Object.assign(corner.style, {
       position: "absolute",
       height: "12px",
