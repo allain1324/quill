@@ -105,7 +105,7 @@ class ImageResize extends Module {
       console.log('detalX', deltaX)
       console.log("preDragWidth", this.preDragWidth);
       console.log("dragStartX", this.dragStartX);
-      this.media.width = Math.round(this.preDragWidth - deltaX);
+      // this.media.width = Math.round(this.preDragWidth - deltaX);
 
     }
     else if (
@@ -182,7 +182,7 @@ class ImageResize extends Module {
         }px`,
       top: `${mediaRect.top - containerRect.top + this.parentNode.scrollTop}px`,
       width: `${mediaRect.width + 2}px`,
-      height: `265px`,
+      height: `${mediaRect.height + 1}px`,
     });
   };
 
