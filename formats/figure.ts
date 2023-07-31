@@ -1,4 +1,4 @@
-import { LinkedList, EmbedBlot } from 'parchment';
+// import { LinkedList, EmbedBlot } from 'parchment';
 import Block from '../blots/block';
 
 import Image from './image';
@@ -8,7 +8,7 @@ class Figure extends Block {
   static tagName = 'FIGURE';
 
   // static allowedChildren = ['EmbedBlot'];
-  children: LinkedList<Image>;
+  // children: LinkedList<Image>;
 
   static create(value) {
     const domNode = super.create(value) as Element;
@@ -17,6 +17,6 @@ class Figure extends Block {
 
 
 }
-Figure.allowedChildren = [EmbedBlot];
+
 
 export default Figure;
