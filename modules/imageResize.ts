@@ -105,7 +105,8 @@ class ImageResize extends Module {
       console.log('detalX', deltaX)
       console.log("preDragWidth", this.preDragWidth);
       console.log("dragStartX", this.dragStartX);
-      // this.media.width = Math.round(this.preDragWidth - deltaX);
+      this.media.width = Math.round(this.preDragWidth - deltaX);
+      this.media.height = 265;
 
     }
     else if (
