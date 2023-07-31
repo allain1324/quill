@@ -174,6 +174,8 @@ class ImageResize extends Module {
     const mediaRect = this.media.getBoundingClientRect();
     const containerRect = this.parentNode.getBoundingClientRect();
 
+    console.log("mediaRect", mediaRect);
+    console.log("containerRect", containerRect);
     Object.assign(this.overlay.style, {
       left: `${mediaRect.left - containerRect.left - 2 + this.parentNode.scrollLeft
         }px`,
