@@ -101,7 +101,7 @@ class ImageResize extends Module {
     // update image size
     const deltaX = event.clientX - this.dragStartX;
     // console.log("handleDrag", this.dragCorner, this.corners, this.dragCorner === this.corners[3])
-    if (this.dragCorner === this.corners[3]) {
+    if (this.dragCorner === this.corners[2] || this.dragCorner === this.corners[5]) {
       console.log('detalX', deltaX)
       return;
     }
