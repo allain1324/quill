@@ -102,18 +102,20 @@ class ImageResize extends Module {
     }
     // update image size
     const deltaX = event.clientX - this.dragStartX;
-    if(event.target){
-      console.log("cursor handleDrag", (event.target as HTMLElement).style.cursor);
-    }
 
-    if (this.dragCorner === this.corners[2] || this.dragCorner === this.corners[5]) {
+    if (this.dragCorner === this.corners[2]) {
       this.media.width = Math.round(this.preDragWidth + deltaX);
       this.media.height = this.media.height;
     }
-    else if (this.dragCorner === this.corners[0] ||this.dragCorner === this.corners[4]) {
+    else if (this.dragCorner === this.corners[5]) {
+      this.media.width = Math.round(this.preDragWidth - deltaX);
+      this.media.height = this.media.height;
+    }
+    else if (this.dragCorner === this.corners[0] || this.dragCorner === this.corners[4]) {
       this.media.width = Math.round(this.preDragWidth - deltaX);
       this.media.height = Math.round(this.preDragHeight - deltaX);
-    } else {
+    } 
+    else {
       this.media.width = Math.round(this.preDragWidth + deltaX);
       this.media.height = Math.round(this.preDragHeight + deltaX);
     }
