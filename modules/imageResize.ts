@@ -10,6 +10,7 @@ class ImageResize extends Module {
   private dragCorner?: HTMLDivElement;
   private dragStartX: number = 0;
   private preDragWidth: number = 0;
+  private preDragHeight: number = 0;
   private corners: HTMLDivElement[] = [];
 
 
@@ -82,6 +83,7 @@ class ImageResize extends Module {
     this.dragCorner = event.target as HTMLDivElement;
     this.dragStartX = event.clientX;
     this.preDragWidth = this.media?.width || this.media?.naturalWidth || 0;
+    this.preDragHeight = this.media?.height || this.media?.naturalHeight || 0;
     this.setCursor(this.dragCorner.style.cursor);
     document.addEventListener("mousemove", this.handleDrag, false);
     document.addEventListener("mouseup", this.handleMouseup, false);
@@ -106,19 +108,15 @@ class ImageResize extends Module {
     console.log("dragStartX", this.dragStartX);
     console.log("dragCorner", this.dragCorner);
     if (this.dragCorner === this.corners[2] || this.dragCorner === this.corners[5]) {
-      console.log("dragCorner1")
       this.media.width = Math.round(this.preDragWidth + deltaX);
       this.media.height = this.media.height;
     }
-    else if (
-      this.dragCorner === this.corners[0] ||
-      this.dragCorner === this.corners[4]
-    ) {
-      console.log("dragCorner2")
+    else if (this.dragCorner === this.corners[0] ||this.dragCorner === this.corners[4]) {
       this.media.width = Math.round(this.preDragWidth - deltaX);
+      this.media.height = Math.round(this.preDragHeight - deltaX);
     } else {
-      console.log("dragCorner3")
       this.media.width = Math.round(this.preDragWidth + deltaX);
+      this.media.height = Math.round(this.preDragHeight + deltaX);
     }
     console.log("handleDrag-media", this.media);
     this.repositionElements();
