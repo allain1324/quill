@@ -104,12 +104,11 @@ class ImageResize extends Module {
     console.log('detalX', deltaX)
     console.log("preDragWidth", this.preDragWidth);
     console.log("dragStartX", this.dragStartX);
-    console.log("dragCorner", this.dragCorner);
+    console.log("")
     if (this.dragCorner === this.corners[2] || this.dragCorner === this.corners[5]) {
       console.log("dragCorner1")
-      const heightMedia = this.media.height;
       this.media.width = Math.round(this.preDragWidth - deltaX);
-      this.media.height = heightMedia;
+      this.media.height = this.media.height;
     }
     else if (
       this.dragCorner === this.corners[0] ||
@@ -117,9 +116,11 @@ class ImageResize extends Module {
     ) {
       console.log("dragCorner2")
       this.media.width = Math.round(this.preDragWidth - deltaX);
+      this.media.height = this.media.height - 1;
     } else {
       console.log("dragCorner3")
       this.media.width = Math.round(this.preDragWidth + deltaX);
+      this.media.height = this.media.height - 1;
     }
     this.repositionElements();
   };
