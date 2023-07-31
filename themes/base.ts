@@ -206,7 +206,7 @@ BaseTheme.DEFAULTS = merge({}, Theme.DEFAULTS, {
         },
         figure() {
           let fileInput = this.container.querySelector(
-            'input.ql-image[type=file]',
+            'input.ql-figure[type=file]',
           );
           if (fileInput == null) {
             fileInput = document.createElement('input');
