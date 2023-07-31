@@ -1,7 +1,7 @@
 // import { LinkedList, EmbedBlot } from 'parchment';
 import Block from '../blots/block';
 
-import Image from './image';
+// import Image from './image';
 
 class Figure extends Block {
   static blotName = 'figure';
