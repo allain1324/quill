@@ -54,6 +54,10 @@ class ImageResize extends Module {
     this.addCorner("nwse-resize", { right: "-6px", bottom: "-6px" });
     this.addCorner("nesw-resize", { left: "-6px", bottom: "-6px" });
     this.addCorner("col-resize", { left: "-6px", bottom: "50%" });
+
+    this.corners.forEach(ele => {
+      console.log("showCorners", ele.outerHTML);
+    })
   };
 
   addCorner = (cursor: string, positions: { [key: string]: string }) => {
@@ -96,7 +100,7 @@ class ImageResize extends Module {
     }
     // update image size
     const deltaX = event.clientX - this.dragStartX;
-    console.log("handleDrag", this.dragCorner, this.corners, this.dragCorner === this.corners[3])
+    // console.log("handleDrag", this.dragCorner, this.corners, this.dragCorner === this.corners[3])
     if (this.dragCorner === this.corners[3]) {
       console.log('detalX', deltaX)
       return;
