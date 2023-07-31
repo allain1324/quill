@@ -7,7 +7,7 @@ class Figure extends Block {
   static blotName = 'figure';
   static tagName = 'FIGURE';
 
-  static allowedChildren = ['EmbedBlot'];
+  // static allowedChildren = ['EmbedBlot'];
   children: LinkedList<Image>;
 
   static create(value) {
@@ -17,5 +17,6 @@ class Figure extends Block {
 
 
 }
+Figure.allowedChildren = [EmbedBlot];
 
 export default Figure;
