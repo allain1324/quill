@@ -106,18 +106,17 @@ class ImageResize extends Module {
       console.log("preDragWidth", this.preDragWidth);
       console.log("dragStartX", this.dragStartX);
       this.media.width = Math.round(this.preDragWidth - deltaX);
-      this.repositionElements();
-      return;
+
     }
-    // if (
-    //   this.dragCorner === this.corners[0] ||
-    //   this.dragCorner === this.corners[4]
-    // ) {
-    //   this.media.width = Math.round(this.preDragWidth - deltaX);
-    // } else {
-    //   this.media.width = Math.round(this.preDragWidth + deltaX);
-    // }
-    // this.repositionElements();
+    else if (
+      this.dragCorner === this.corners[0] ||
+      this.dragCorner === this.corners[4]
+    ) {
+      this.media.width = Math.round(this.preDragWidth - deltaX);
+    } else {
+      this.media.width = Math.round(this.preDragWidth + deltaX);
+    }
+    this.repositionElements();
   };
 
   showOverlay = () => {
