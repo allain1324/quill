@@ -12,7 +12,7 @@ class Figcaption extends Block {
   static tagName = 'FIGCAPTION';
 
   next: this | null;
-  
+
   static create(value) {
     const domNode = super.create(value) as Element;
     return domNode;
@@ -26,6 +26,7 @@ class Figure extends Block {
   children: LinkedList<Figcaption>;
 
   static create(value) {
+    console.log("value figure", value);
     const domNode = super.create(value) as Element;
     return domNode;
   }
