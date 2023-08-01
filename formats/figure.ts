@@ -14,6 +14,7 @@ class Figcaption extends Block {
   next: this | null;
 
   static create(value) {
+    console.log("value figcaption", value);
     const domNode = super.create(value) as Element;
     return domNode;
   }

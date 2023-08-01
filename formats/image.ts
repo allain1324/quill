@@ -10,6 +10,7 @@ class Image extends EmbedBlot {
   next: this | null;
 
   static create(value) {
+    console.log("value image", value)
     const node = super.create(value) as Element;
     if (typeof value === 'string') {
       node.setAttribute('src', this.sanitize(value));
