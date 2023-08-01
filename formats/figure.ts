@@ -18,6 +18,10 @@ class Figcaption extends Block {
     const domNode = super.create(value) as Element;
     return domNode;
   }
+
+  value(domNode) {
+   console.log("Figcaption domnode", domNode);
+  }
 }
 
 class Figure extends Block {
