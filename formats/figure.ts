@@ -22,7 +22,7 @@ class Figure extends Block {
     return domNode;
   }
 }
-Figure.allowedChildren = [EmbedBlot];
-EmbedBlot.requiredContainer = Figure;
+Figure.allowedChildren = [Block];
+Figcaption.requiredContainer = Figure;
 
 export default Figure;
