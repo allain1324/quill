@@ -43,8 +43,8 @@ class Figure extends Block {
     // return domNode;
   }
 }
-Figure.allowedChildren = [Image, Figcaption];
-Image.requiredContainer = Figure;
-Figcaption.requiredContainer = Figure;
+// Figure.allowedChildren = [Image, Figcaption];
+// Image.requiredContainer = Figure;
+// Figcaption.requiredContainer = Figure;
 
 export { Figcaption, Figure };
