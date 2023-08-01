@@ -18,6 +18,7 @@ class Figcaption extends EmbedBlot {
     const domNode = super.create(value) as Element;
     if(typeof value === 'string') {
       domNode.innerHTML = value;
+      domNode.setAttribute('contenteditable', 'true');
     }    
     return domNode;
   }
@@ -48,8 +49,8 @@ class Figure extends EmbedBlot {
     return domNode;
   }
 }
-Figure.allowedChildren = [Image, Figcaption];
-Image.requiredContainer = Figure;
-Figcaption.requiredContainer = Figure;
+// Figure.allowedChildren = [Image, Figcaption];
+// Image.requiredContainer = Figure;
+// Figcaption.requiredContainer = Figure;
 
 export { Figcaption, Figure };
