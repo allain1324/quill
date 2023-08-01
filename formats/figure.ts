@@ -36,6 +36,7 @@ class Figure extends Block {
       Image.create(value.image);
     }
     const domNode = super.create(value) as Element;
+    console.log("domNode-figure", domNode);
     return domNode;
   }
 }
