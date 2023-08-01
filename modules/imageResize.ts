@@ -16,14 +16,29 @@ class ImageResize extends Module {
 
   constructor(quill: Quill) {
     super(quill);
-    this.quill.root.addEventListener('mouseover', this.handleClick, false);
+    this.quill.root.addEventListener('click', this.handleMouseClick, false);
+    this.quill.root.addEventListener('mouseover', this.handleMouseOver, false);
     this.quill.root.addEventListener('mouseleave', this.handleMouseleave, false);
     this.parentNode = this.quill.root.parentNode as HTMLElement;
     this.parentNode.style.position =
       this.parentNode.style.position || "relative";
   }
 
-  handleClick = (event: MouseEvent): void => {
+  handleMouseClick = (event: MouseEvent) => {
+    const target = event.target ? (event.target as HTMLElement) : null;
+    console.log("target", target);
+    if (this.media === target) {
+      return;
+    }
+    if (this.media) {
+      // this.hide();
+    }
+    if (target && ["img"].includes(target.tagName.toLowerCase())) {
+      this.show(target as HTMLImageElement);
+    }
+  }
+
+  handleMouseOver = (event: MouseEvent): void => {
     const target = event.target ? (event.target as HTMLElement) : null;
     console.log("target", target);
     if (this.media === target) {
@@ -119,7 +134,7 @@ class ImageResize extends Module {
     else if (this.dragCorner === this.corners[0] || this.dragCorner === this.corners[4]) {
       this.media.width = Math.round(this.preDragWidth - deltaX);
       this.media.height = Math.round(this.preDragHeight - deltaX);
-    } 
+    }
     else {
       this.media.width = Math.round(this.preDragWidth + deltaX);
       this.media.height = Math.round(this.preDragHeight + deltaX);
