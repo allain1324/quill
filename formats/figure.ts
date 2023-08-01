@@ -32,8 +32,15 @@ class Figure extends Block {
 
   static create(value) {
     console.log("value figure", value);
-    const domNode = super.create(value) as Element;
-    return domNode;
+    if(value instanceof Object) {
+      Image.create(value.image);
+      Figcaption.create(value.figcaption);
+    }
+    else {
+      // const domNode = super.create(value) as Element;
+    }
+
+    // return domNode;
   }
 }
 Figure.allowedChildren = [Image, Figcaption];
