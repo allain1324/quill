@@ -33,7 +33,8 @@ class Figure extends Block {
   static create(value) {
     console.log("value figure", value);
     if (typeof value === 'object') {
-      Image.create(value.image);
+      const imageNode = Image.create(value.image);
+      console.log("imageNode", imageNode);
     }
     const domNode = super.create(value) as Element;
     console.log("domNode-figure", domNode);
