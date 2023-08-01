@@ -98,8 +98,9 @@ class ImageResize extends Module {
     });
     corner.style.cursor = cursor;
     corner.addEventListener("mousedown", this.handleMousedown, false);
-    corner.addEventListener("mouseleave", this.handleMouseleave, false);
+
     this.overlay?.appendChild(corner);
+    this.overlay?.addEventListener("mouseleave", this.handleMouseleave, false);
     this.corners.push(corner);
   };
 
@@ -165,6 +166,7 @@ class ImageResize extends Module {
   hideOverlay = () => {
     if (this.overlay) {
       this.parentNode.removeChild(this.overlay);
+      this.overlay.removeEventListener('mouseleave', this.handleMouseleave);
       this.overlay = undefined;
       this.setUserSelect("");
     }
