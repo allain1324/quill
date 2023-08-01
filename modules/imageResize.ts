@@ -78,7 +78,7 @@ class ImageResize extends Module {
     this.addCorner("nwse-resize", { right: "-6px", bottom: "-6px" });
     this.addCorner("nesw-resize", { left: "-6px", bottom: "-6px" });
     this.addCorner("col-resize", { left: "-6px", top: "50%" });
-    this.addButtonNewline("pointer", { left: "50%", top: "50%" });
+    this.addButtonNewline("pointer", { left: "50%", top: "0px" });
 
     this.corners.forEach(ele => {
       console.log("showCorners", ele.outerHTML);
@@ -86,7 +86,7 @@ class ImageResize extends Module {
   };
 
   addButtonNewline = (cursor: string, positions: { [key: string]: string}) => {
-    const btnNewLine = icons['start2'];
+    const btnNewLine = document.createElement("svg");
     Object.assign(btnNewLine.style, {
       position: "absolute",
       height: "12px",
@@ -94,6 +94,7 @@ class ImageResize extends Module {
       fill: "black",
       ...positions,
     });
+    btnNewLine.innerHTML = icons['stat2']
     btnNewLine.style.cursor = cursor;
     this.overlay?.appendChild(btnNewLine);
   };
