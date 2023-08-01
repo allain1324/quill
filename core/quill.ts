@@ -343,6 +343,7 @@ class Quill {
           });
         }
         this.setSelection(range, Emitter.sources.SILENT);
+        console.log("core-quill-format1", change);
         return change;
       },
       source,
