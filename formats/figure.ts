@@ -20,7 +20,7 @@ class Figcaption extends Block {
   }
 
   value(domNode) {
-   console.log("Figcaption domnode", domNode);
+    console.log("Figcaption domnode", domNode);
   }
 }
 
@@ -32,17 +32,15 @@ class Figure extends Block {
 
   static create(value) {
     console.log("value figure", value);
-    const domNode = super.create(value) as Element;
-    if(value instanceof Object) {
+    if (typeof value === 'object') {
       Image.create(value.image);
-      Figcaption.create(value.figcaption);
     }
-
+    const domNode = super.create(value) as Element;
     return domNode;
   }
 }
-// Figure.allowedChildren = [Image, Figcaption];
-// Image.requiredContainer = Figure;
-// Figcaption.requiredContainer = Figure;
+Figure.allowedChildren = [Image, Figcaption];
+Image.requiredContainer = Figure;
+Figcaption.requiredContainer = Figure;
 
 export { Figcaption, Figure };
