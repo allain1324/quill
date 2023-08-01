@@ -87,6 +87,8 @@ class ImageResize extends Module {
 
   addButtonNewline = (cursor: string, positions: { [key: string]: string}) => {
     const btnNewLine = document.createElement("svg");
+    console.log("before btnNewLine", btnNewLine);
+    btnNewLine.innerHTML = icons['stat2']
     Object.assign(btnNewLine.style, {
       position: "absolute",
       height: "12px",
@@ -94,8 +96,6 @@ class ImageResize extends Module {
       fill: "black",
       ...positions,
     });
-    console.log("before btnNewLine", btnNewLine);
-    btnNewLine.innerHTML = icons['stat2']
     console.log("after btnNewLine", btnNewLine);
     btnNewLine.style.cursor = cursor;
     this.overlay?.appendChild(btnNewLine);
