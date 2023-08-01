@@ -16,10 +16,11 @@ class Figcaption extends Block {
   static create(value) {
     console.log("value figcaption", value);
     const domNode = super.create(value) as Element;
-    if(typeof value === 'string') {
+    if (typeof value === 'string') {
       domNode.innerHTML = value;
       domNode.setAttribute('contenteditable', 'true');
-    }    
+      domNode.setAttribute('class', 'ql-align-center');
+    }
     return domNode;
   }
 
