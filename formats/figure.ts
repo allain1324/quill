@@ -31,12 +31,16 @@ class Figure extends Block {
   children: LinkedList<Figcaption>;
 
   static create(value) {
+    const domNode = super.create(value) as Element;
     console.log("value figure", value);
     if (typeof value === 'object') {
       const imageNode = Image.create(value.image);
+      const figcaption = Figcaption.create(value.figcaption);
+      domNode.appendChild(imageNode);
+      domNode.appendChild(figcaption);
       console.log("imageNode", imageNode);
     }
-    const domNode = super.create(value) as Element;
+
     console.log("domNode-figure", domNode);
     return domNode;
   }
