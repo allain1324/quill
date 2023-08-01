@@ -11,6 +11,8 @@ class Figcaption extends Block {
   static blotName = 'figcaption';
   static tagName = 'FIGCAPTION';
 
+  next: this | null;
+  
   static create(value) {
     const domNode = super.create(value) as Element;
     return domNode;
