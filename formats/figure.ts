@@ -1,4 +1,4 @@
-import { LinkedList, EmbedBlot } from 'parchment';
+import { LinkedList } from 'parchment';
 import Block from '../blots/block';
 import Image from './image'
 
