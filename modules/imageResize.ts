@@ -18,7 +18,6 @@ class ImageResize extends Module {
     super(quill);
     this.quill.root.addEventListener('click', this.handleMouseClick, false);
     this.quill.root.addEventListener('mouseover', this.handleMouseOver, false);
-    this.quill.root.addEventListener('mouseout', this.handleMouseleave, false);
     this.parentNode = this.quill.root.parentNode as HTMLElement;
     this.parentNode.style.position =
       this.parentNode.style.position || "relative";
