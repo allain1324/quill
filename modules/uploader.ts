@@ -70,9 +70,9 @@ Uploader.DEFAULTS = {
     Promise.all(promises).then(images => {
       const update = images.reduce((delta: Delta, image) => {
         console.log("promises image", image);
-        return new Delta({
+        return new Delta([{
           insert: "Text", attributes: { bold: true }
-        });
+        }]);
       }, new Delta().retain(range.index).delete(range.length)) as Delta;
       this.quill.updateContents(update, Emitter.sources.USER);
       this.quill.setSelection(
