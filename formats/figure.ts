@@ -15,7 +15,10 @@ class Figcaption extends Block {
 
   static create(value) {
     console.log("value figcaption", value);
-    const domNode = super.create(value) as Element;
+    const domNode = super.create() as Element;
+    if(typeof value === 'string') {
+      domNode.innerHTML = value;
+    }    
     return domNode;
   }
 
@@ -31,7 +34,7 @@ class Figure extends Block {
   children: LinkedList<Figcaption>;
 
   static create(value) {
-    const domNode = super.create(value) as Element;
+    const domNode = super.create() as Element;
     console.log("value figure", value);
     if (typeof value === 'object') {
       const imageNode = Image.create(value.image);
