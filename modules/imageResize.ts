@@ -17,6 +17,7 @@ class ImageResize extends Module {
   constructor(quill: Quill) {
     super(quill);
     this.quill.root.addEventListener('mouseover', this.handleClick, false);
+    this.quill.root.addEventListener('mouseleave', this.handleMouseleave, false);
     this.parentNode = this.quill.root.parentNode as HTMLElement;
     this.parentNode.style.position =
       this.parentNode.style.position || "relative";
@@ -34,6 +35,10 @@ class ImageResize extends Module {
     if (target && ["img"].includes(target.tagName.toLowerCase())) {
       this.show(target as HTMLImageElement);
     }
+  }
+
+  handleMouseleave = (event: MouseEvent): void => {
+    this.hide();
   }
 
   show = (media: HTMLImageElement) => {
