@@ -52,13 +52,13 @@ class ImageResize extends Module {
   }
 
   handleMouseleave = (event: MouseEvent): void => {
+    console.log("targetMouseLeave", event.target);
     this.hide();
   }
 
   show = (media: HTMLImageElement) => {
     this.media = media;
     this.media.addEventListener('mouseover', this.handleMouseOver, false);
-    this.media.addEventListener('mouseleave', this.handleMouseleave, false);
     this.showOverlay();
     this.showCorners();
   };
@@ -66,7 +66,6 @@ class ImageResize extends Module {
   hide = () => {
     if (this.media) {
       this.media.removeEventListener('mouseover', this.handleMouseOver)
-      this.media.removeEventListener('mouseleave', this.handleMouseleave)
       this.media = undefined;
       this.hideOverlay();
     }
@@ -99,6 +98,7 @@ class ImageResize extends Module {
     });
     corner.style.cursor = cursor;
     corner.addEventListener("mousedown", this.handleMousedown, false);
+    corner.addEventListener("mouseleave", this.handleMouseleave, false);
     this.overlay?.appendChild(corner);
     this.corners.push(corner);
   };
