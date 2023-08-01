@@ -7,6 +7,8 @@ class Image extends EmbedBlot {
   static blotName = 'image';
   static tagName = 'IMG';
 
+  next: this | null;
+
   static create(value) {
     const node = super.create(value) as Element;
     if (typeof value === 'string') {
