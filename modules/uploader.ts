@@ -70,10 +70,8 @@ Uploader.DEFAULTS = {
     Promise.all(promises).then(images => {
       const update = images.reduce((delta: Delta, image) => {
         console.log("promises image", image);
-        return delta.insert({
-          figure: {
-            img: image
-          }
+        return delta.retain(1, {
+          figure: true
         });
       }, new Delta().retain(range.index).delete(range.length)) as Delta;
       this.quill.updateContents(update, Emitter.sources.USER);

@@ -204,27 +204,6 @@ BaseTheme.DEFAULTS = merge({}, Theme.DEFAULTS, {
           }
           fileInput.click();
         },
-        figure() {
-          let fileInput = this.container.querySelector(
-            'input.ql-figure[type=file]',
-          );
-          if (fileInput == null) {
-            fileInput = document.createElement('input');
-            fileInput.setAttribute('type', 'file');
-            fileInput.setAttribute(
-              'accept',
-              this.quill.uploader.options.mimetypes.join(', '),
-            );
-            fileInput.classList.add('ql-figure');
-            fileInput.addEventListener('change', () => {
-              const range = this.quill.getSelection(true);
-              this.quill.uploader.upload(range, fileInput.files);
-              fileInput.value = '';
-            });
-            this.container.appendChild(fileInput);
-          }
-          fileInput.click();
-        },
         video() {
           this.quill.theme.tooltip.edit('video');
         },
