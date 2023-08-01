@@ -9,7 +9,7 @@ import Image from './image'
 // }
 class Figcaption extends Block {
   static blotName = 'figcaption';
-  static tagName  = 'FIGCAPTION';
+  static tagName = 'FIGCAPTION';
 
   static create(value) {
     const domNode = super.create(value) as Element;
@@ -32,4 +32,4 @@ Figure.allowedChildren = [Image, Figcaption];
 Image.requiredContainer = Figure;
 Figcaption.requiredContainer = Figure;
 
-export default Figure;
+export { Figcaption, Figure };

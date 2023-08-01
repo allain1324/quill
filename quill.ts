@@ -25,7 +25,7 @@ import Strike from './formats/strike';
 import Underline from './formats/underline';
 
 import Formula from './formats/formula';
-import Figure from './formats/figure';
+import {Figure, Figcaption} from './formats/figure';
 import Image from './formats/image';
 import Video from './formats/video';
 
@@ -91,6 +91,7 @@ Quill.register(
 
     'formats/formula': Formula,
     'formats/figure': Figure,
+    'formats/figcaption': Figcaption,
     'formats/image': Image,
     'formats/video': Video,
 
