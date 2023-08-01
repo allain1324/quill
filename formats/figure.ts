@@ -1,4 +1,4 @@
-import { LinkedList, EmbedBlot } from 'parchment';
+import { LinkedList } from 'parchment';
 import Block from '../blots/block';
 import Image from './image'
 
@@ -7,7 +7,7 @@ import Image from './image'
 //   static tagName = 'IMG';
 
 // }
-class Figcaption extends EmbedBlot {
+class Figcaption extends Block {
   static blotName = 'figcaption';
   static tagName = 'FIGCAPTION';
 
@@ -28,7 +28,7 @@ class Figcaption extends EmbedBlot {
   }
 }
 
-class Figure extends EmbedBlot {
+class Figure extends Block {
   static blotName = 'figure';
   static tagName = 'FIGURE';
 
@@ -49,8 +49,8 @@ class Figure extends EmbedBlot {
     return domNode;
   }
 }
-// Figure.allowedChildren = [Image, Figcaption];
-// Image.requiredContainer = Figure;
-// Figcaption.requiredContainer = Figure;
+Figure.allowedChildren = [Image, Figcaption];
+Image.requiredContainer = Figure;
+Figcaption.requiredContainer = Figure;
 
 export { Figcaption, Figure };
