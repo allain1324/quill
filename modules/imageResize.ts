@@ -6,6 +6,7 @@ class ImageResize extends Module {
 
   private media?: HTMLImageElement;
   private overlay?: HTMLDivElement;
+  private overlayFigure?: HTMLDivElement;
   private parentNode: HTMLElement;
   private dragCorner?: HTMLDivElement;
   private dragStartX: number = 0;
