@@ -1,4 +1,4 @@
-import { LinkedList } from 'parchment';
+import { LinkedList, EmbedBlot } from 'parchment';
 import Block from '../blots/block';
 import Image from './image'
 
@@ -7,7 +7,7 @@ import Image from './image'
 //   static tagName = 'IMG';
 
 // }
-class Figcaption extends Block {
+class Figcaption extends EmbedBlot {
   static blotName = 'figcaption';
   static tagName = 'FIGCAPTION';
 
@@ -27,7 +27,7 @@ class Figcaption extends Block {
   }
 }
 
-class Figure extends Block {
+class Figure extends EmbedBlot {
   static blotName = 'figure';
   static tagName = 'FIGURE';
 
