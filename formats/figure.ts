@@ -10,6 +10,11 @@ import Image from './image'
 class Figcaption extends Block {
   static blotName = 'figcaption';
   static tagName  = 'FIGCAPTION';
+
+  static create(value) {
+    const domNode = super.create(value) as Element;
+    return domNode;
+  }
 }
 
 class Figure extends Block {
