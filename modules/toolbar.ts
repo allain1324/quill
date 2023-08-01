@@ -114,6 +114,7 @@ class Toolbar extends Module<ToolbarProps> {
       const [range] = this.quill.selection.getRange();
       // @ts-expect-error Fix me later
       if (this.handlers[format] != null) {
+        console.log("modules-toolbar-handlers1");
         // @ts-expect-error Fix me later
         this.handlers[format].call(this, value);
       } else if (
@@ -133,6 +134,7 @@ class Toolbar extends Module<ToolbarProps> {
           Quill.sources.USER,
         );
       } else {
+        console.log("modules-toolbar-handlers2");
         // @ts-expect-error Fix me later
         this.quill.format(format, value, Quill.sources.USER);
       }
