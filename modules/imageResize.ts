@@ -38,6 +38,7 @@ class ImageResize extends Module {
   }
 
   handleMouseleave = (event: MouseEvent): void => {
+    console.log("mouseleave", event);
     this.hide();
   }
 
