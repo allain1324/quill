@@ -89,6 +89,7 @@ class Toolbar extends Module<ToolbarProps> {
     const eventName = input.tagName === 'SELECT' ? 'change' : 'click';
     input.addEventListener(eventName, e => {
       let value;
+      console.log("modules-toolbar-eventName", e);
       if (input.tagName === 'SELECT') {
         // @ts-expect-error
         if (input.selectedIndex < 0) return;
