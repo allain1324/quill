@@ -30,7 +30,7 @@ class ImageResize extends Module {
       return;
     }
     if (this.media) {
-      // this.hide();
+      this.hide();
     }
     if (target && ["img"].includes(target.tagName.toLowerCase())) {
       this.show(target as HTMLImageElement);
