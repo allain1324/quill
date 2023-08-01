@@ -1,5 +1,6 @@
 import { LinkedList, EmbedBlot } from 'parchment';
 import Block from '../blots/block';
+import Image from './image'
 
 // class Image extends EmbedBlot {
 //   static blotName = 'image';
@@ -13,7 +14,7 @@ class Figcaption extends Block {
 
 class Figure extends Block {
   static blotName = 'figure';
-  static tagName = 'FIGURE1';
+  static tagName = 'FIGURE';
 
   children: LinkedList<Figcaption>;
 
@@ -22,7 +23,7 @@ class Figure extends Block {
     return domNode;
   }
 }
-Figure.allowedChildren = [EmbedBlot];
-EmbedBlot.requiredContainer = Figure;
+Figure.allowedChildren = [Image];
+Image.requiredContainer = Figure;
 
 export default Figure;
