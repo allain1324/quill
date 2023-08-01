@@ -94,7 +94,9 @@ class ImageResize extends Module {
       fill: "black",
       ...positions,
     });
+    console.log("before btnNewLine", btnNewLine);
     btnNewLine.innerHTML = icons['stat2']
+    console.log("after btnNewLine", btnNewLine);
     btnNewLine.style.cursor = cursor;
     this.overlay?.appendChild(btnNewLine);
   };
