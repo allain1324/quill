@@ -1,11 +1,11 @@
 import {  EmbedBlot } from 'parchment';
 import Block from '../blots/block';
 
-class Image extends EmbedBlot {
-  static blotName = 'image';
-  static tagName = 'IMG';
+// class Image extends EmbedBlot {
+//   static blotName = 'image';
+//   static tagName = 'IMG';
 
-}
+// }
 
 class Figure extends Block {
   static blotName = 'figure';
