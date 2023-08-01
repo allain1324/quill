@@ -40,7 +40,7 @@ class ImageResize extends Module {
 
   handleMouseOver = (event: MouseEvent): void => {
     const target = event.target ? (event.target as HTMLElement) : null;
-    console.log("target", target);
+    console.log("targetMouseOver", target);
     if (this.media === target) {
       return;
     }
