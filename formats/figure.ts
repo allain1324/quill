@@ -9,7 +9,7 @@ import Block from '../blots/block';
 
 class Figure extends Block {
   static blotName = 'figure';
-  static tagName = 'FIGURE';
+  static tagName = 'FIGURE1';
 
   // static allowedChildren = ['EmbedBlot'];
   // children: LinkedList<Image>;
