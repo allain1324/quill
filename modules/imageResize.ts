@@ -1,7 +1,7 @@
 // import Delta from "quill-delta";
 import Quill from "../core/quill";
 import Module from '../core/module';
-
+import icons from '../ui/icons';
 class ImageResize extends Module {
 
   private media?: HTMLImageElement;
@@ -78,10 +78,25 @@ class ImageResize extends Module {
     this.addCorner("nwse-resize", { right: "-6px", bottom: "-6px" });
     this.addCorner("nesw-resize", { left: "-6px", bottom: "-6px" });
     this.addCorner("col-resize", { left: "-6px", top: "50%" });
+    this.addButtonNewline("pointer", { left: "50%", top: "50%" });
 
     this.corners.forEach(ele => {
       console.log("showCorners", ele.outerHTML);
     })
+  };
+
+  addButtonNewline = (cursor: string, positions: { [key: string]: string}) => {
+    const btnNewLine = document.createElement("svg");
+    Object.assign(btnNewLine.style, {
+      position: "absolute",
+      height: "12px",
+      width: "12px",
+      fill: "black",
+      ...positions,
+    });
+    btnNewLine.innerHTML = icons['start2']
+    btnNewLine.style.cursor = cursor;
+    this.overlay?.appendChild(btnNewLine);
   };
 
   addCorner = (cursor: string, positions: { [key: string]: string }) => {
