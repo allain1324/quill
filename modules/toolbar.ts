@@ -71,6 +71,7 @@ class Toolbar extends Module<ToolbarProps> {
 
   attach(input: HTMLElement) {
     console.log("modules-toolbar-attach", input);
+    console.log("modules-toolbar-attach-handler", this.handlers);
     let format = Array.from(input.classList).find(className => {
       return className.indexOf('ql-') === 0;
     });
