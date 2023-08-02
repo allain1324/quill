@@ -19,6 +19,7 @@ class Figcaption extends Block {
     if (typeof value === 'string') {
       domNode.innerHTML = value;
       domNode.setAttribute('contenteditable', 'true');
+      domNode.setAttribute('data-placeholder', 'Enter image caption');
       domNode.setAttribute('class', 'ql-align-center');
     }
     return domNode;
