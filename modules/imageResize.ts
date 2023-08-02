@@ -32,7 +32,7 @@ class ImageResize extends Module {
     if (this.media) {
       this.hide();
     }
-    if (target && ["img"].includes(target.tagName.toLowerCase())) {
+    if (target && ["figure"].includes(target.tagName.toLowerCase())) {
       this.show(target as HTMLImageElement);
     }
   }
@@ -46,7 +46,7 @@ class ImageResize extends Module {
     if (this.media) {
       // this.hide();
     }
-    if (target && ["img"].includes(target.tagName.toLowerCase())) {
+    if (target && ["figure"].includes(target.tagName.toLowerCase())) {
       this.show(target as HTMLImageElement);
     }
   }
@@ -130,6 +130,7 @@ class ImageResize extends Module {
     corner.addEventListener("mousedown", this.handleMousedown, false);
 
     this.overlay?.appendChild(corner);
+    this.overlay?.appendChild(this.createOptionBox());
     this.corners.push(corner);
   };
 
@@ -189,7 +190,7 @@ class ImageResize extends Module {
     });
     console.log("overlayyyyy", this.overlay)
     this.parentNode.appendChild(this.overlay);
-    this.parentNode?.appendChild(this.createOptionBox());
+    
     this.repositionElements();
   };
 
