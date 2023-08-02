@@ -32,7 +32,7 @@ class ImageResize extends Module {
     if (this.media) {
       this.hide();
     }
-    if (target && ["figure"].includes(target.tagName.toLowerCase())) {
+    if (target && ["img"].includes(target.tagName.toLowerCase())) {
       this.show(target as HTMLImageElement);
     }
   }
@@ -46,7 +46,7 @@ class ImageResize extends Module {
     if (this.media) {
       // this.hide();
     }
-    if (target && ["figure"].includes(target.tagName.toLowerCase())) {
+    if (target && ["img"].includes(target.tagName.toLowerCase())) {
       this.show(target as HTMLImageElement);
     }
   }

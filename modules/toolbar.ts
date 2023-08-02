@@ -280,6 +280,7 @@ Toolbar.DEFAULTS = {
       }
     },
     link(value) {
+      console.log("modules-toolbar-link", value);
       if (value === true) {
         value = prompt('Enter link URL:'); // eslint-disable-line no-alert
       }
