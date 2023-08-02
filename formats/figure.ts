@@ -46,9 +46,7 @@ class Figure extends Block {
       domNode.appendChild(figcaption);
       console.log("imageNode", imageNode);
     }
-    domNode.setAttribute('style',"display: inline-block;")
 
-    console.log("domNode-figure", domNode);
     return domNode;
   }
 }
