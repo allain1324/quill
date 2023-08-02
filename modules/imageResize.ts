@@ -91,7 +91,7 @@ class ImageResize extends Module {
       position: "absolute",
       width: '100px',
       height: '30px',
-      'background-color': 'white',
+      'background-color': 'red',
     })
 
     return element;
