@@ -111,7 +111,7 @@ class ImageResize extends Module {
     console.log("after btnNewLine", btnNewLine);
     btnNewLine.style.cursor = cursor;
     this.overlay?.appendChild(btnNewLine);
-    this.overlay?.appendChild(this.createOptionBox());
+    // this.overlay?.appendChild(this.createOptionBox());
   };
 
   addCorner = (cursor: string, positions: { [key: string]: string }) => {
