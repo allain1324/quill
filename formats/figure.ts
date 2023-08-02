@@ -45,6 +45,8 @@ class Figure extends Block {
       domNode.appendChild(imageNode);
       domNode.appendChild(figcaption);
       console.log("imageNode", imageNode);
+
+      domNode.setAttribute("class", "ql-figure-left")
     }
 
     return domNode;
