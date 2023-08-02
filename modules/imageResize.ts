@@ -85,6 +85,18 @@ class ImageResize extends Module {
     })
   };
 
+  createOptionBox = () => {
+    const element = document.createElement("div");
+    Object.assign(element.style, {
+      position: "absolute",
+      width: '100px',
+      height: '30px',
+      'background-color': 'white',
+    })
+
+    return element;
+  }
+
   addButtonNewline = (cursor: string, positions: { [key: string]: string}) => {
     const btnNewLine = document.createElement("svg");
     console.log("before btnNewLine", btnNewLine);
@@ -99,6 +111,7 @@ class ImageResize extends Module {
     console.log("after btnNewLine", btnNewLine);
     btnNewLine.style.cursor = cursor;
     this.overlay?.appendChild(btnNewLine);
+    this.overlay?.appendChild(this.createOptionBox());
   };
 
   addCorner = (cursor: string, positions: { [key: string]: string }) => {
@@ -222,6 +235,7 @@ class ImageResize extends Module {
     console.log("containerRect", containerRect);
     console.log("parentNode", this.parentNode);
     Object.assign(this.overlay.style, {
+      position: 'relative',
       left: `${mediaRect.left - containerRect.left - 2 + this.parentNode.scrollLeft
         }px`,
       top: `${mediaRect.top - containerRect.top + this.parentNode.scrollTop}px`,

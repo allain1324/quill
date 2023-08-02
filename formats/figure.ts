@@ -34,6 +34,8 @@ class Figure extends Block {
   static blotName = 'figure';
   static tagName = 'FIGURE';
 
+  static TEMPLATE = ''
+
   children: LinkedList<Figcaption>;
 
   static create(value) {
