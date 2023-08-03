@@ -109,7 +109,7 @@ class ImageResize extends Module {
 
   attach = (input: HTMLElement) => {
     input.addEventListener("click", () => {
-      this.handlers['subtitle']
+      this.handlers()['subtitle']
     })
   }
 
