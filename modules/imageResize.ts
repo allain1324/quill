@@ -86,7 +86,7 @@ class ImageResize extends Module {
   };
 
   createOptionBox = () => {
-    const OPTIONBOX_CONFIG = ['bold']
+    const OPTIONBOX_CONFIG = ['stat2Icon']
 
     const element = document.createElement("div");
     Object.assign(element.style, {
