@@ -89,14 +89,8 @@ class ImageResize extends Module {
     const OPTIONBOX_CONFIG = ['stat2']
 
     const element = document.createElement("div");
-    Object.assign(element.style, {
-      position: "absolute",
-      width: '100px',
-      height: '30px',
-      top: '100%',
-      left: '50%',
-      'background-color': 'red',
-    })
+
+    element.classList.add('ql-toolbox-resize');
 
     this.buildButton(element, OPTIONBOX_CONFIG);
 
