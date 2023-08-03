@@ -86,7 +86,7 @@ class ImageResize extends Module {
   };
 
   createOptionBox = () => {
-    const OPTIONBOX_CONFIG = ['stat2']
+    const OPTIONBOX_CONFIG = ['subtitle']
 
     const element = document.createElement("div");
 

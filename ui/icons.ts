@@ -29,7 +29,8 @@ import tableIcon from '../assets/icons/table.svg';
 import underlineIcon from '../assets/icons/underline.svg';
 import videoIcon from '../assets/icons/video.svg';
 import stat2Icon from '../assets/icons/stat2.svg';
-import statMinus2Icon from '../assets/icons/statminus2.svg'
+import statMinus2Icon from '../assets/icons/statminus2.svg';
+import subtitleIcon from '../assets/icons/subtitle.svg';
 
 export default {
   align: {
@@ -77,4 +78,5 @@ export default {
   video: videoIcon,
   stat2: stat2Icon,
   statminus2: statMinus2Icon,
+  subtitle: subtitleIcon
 };
