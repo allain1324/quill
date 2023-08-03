@@ -36,7 +36,7 @@ export default {
     '': alignLeftIcon,
     center: alignCenterIcon,
     right: alignRightIcon,
-    justify: alignJustifyIcon,
+    justify: alignJustifyIcon,  
   },
   background: backgroundIcon,
   blockquote: blockquoteIcon,

@@ -86,6 +86,8 @@ class ImageResize extends Module {
   };
 
   createOptionBox = () => {
+    const OPTIONBOX_CONFIG = ['bold']
+
     const element = document.createElement("div");
     Object.assign(element.style, {
       position: "absolute",
@@ -96,7 +98,17 @@ class ImageResize extends Module {
       'background-color': 'red',
     })
 
+    this.buildButton(element, OPTIONBOX_CONFIG);
+
     return element;
+  }
+
+  buildButton = (element: HTMLDivElement, options: Array<string>) => {
+    Array.from(options).forEach(option => {
+      const button = document.createElement('button');
+      button.innerHTML = icons[option]
+      element.appendChild(button);
+    })
   }
 
   addButtonNewline = (cursor: string, positions: { [key: string]: string}) => {
