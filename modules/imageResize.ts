@@ -2,6 +2,7 @@
 import Quill from "../core/quill";
 import Module from '../core/module';
 import icons from '../ui/icons';
+
 class ImageResize extends Module {
 
   private media?: HTMLImageElement;
@@ -101,11 +102,28 @@ class ImageResize extends Module {
     Array.from(options).forEach(option => {
       const button = document.createElement('button');
       button.innerHTML = icons[option]
+      this.attach(button)
       element.appendChild(button);
     })
   }
 
-  addButtonNewline = (cursor: string, positions: { [key: string]: string}) => {
+  attach = (input: HTMLElement) => {
+    input.addEventListener("click", () => {
+      this.handlers['subtitle']
+    })
+  }
+
+  handlers = () => {
+    function subtitle() {
+      console.log("test subtitle");
+    }
+
+    return {
+      subtitle
+    }
+  }
+
+  addButtonNewline = (cursor: string, positions: { [key: string]: string }) => {
     const btnNewLine = document.createElement("svg");
     console.log("before btnNewLine", btnNewLine);
     btnNewLine.innerHTML = icons['stat2']
@@ -198,7 +216,7 @@ class ImageResize extends Module {
     });
     console.log("overlayyyyy", this.overlay)
     this.parentNode.appendChild(this.overlay);
-    
+
     this.repositionElements();
   };
 
