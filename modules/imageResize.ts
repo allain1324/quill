@@ -126,7 +126,7 @@ class ImageResize extends Module {
     console.log("size-image-before", this.media.width, this.media?.height);
     this.repositionElements();
     console.log("size-image-after", this.media.width, this.media?.height);
-    console.log("size-image-overlay-after", this.overlay?.style);
+    console.log("size-image-overlay-after", this.overlay?.style.width, this.overlay?.style.height);
   };
 
   showOverlay = () => {
