@@ -25,7 +25,7 @@ class ImageResize extends Module {
 
   handleMouseClick = (event: MouseEvent) => {
     const target = event.target ? (event.target as HTMLElement) : null;
-    console.log("target", target);
+    console.log("target-mouseclick", target);
     if (this.media === target) {
       return;
     }
