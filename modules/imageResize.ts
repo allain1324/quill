@@ -1,6 +1,7 @@
 // import Delta from "quill-delta";
 import Quill from "../core/quill";
 import Module from '../core/module';
+import Emitter from "../core/emitter";
 
 class ImageResize extends Module {
 
@@ -20,7 +21,13 @@ class ImageResize extends Module {
     this.parentNode = this.quill.root.parentNode as HTMLElement;
     this.parentNode.style.position =
       this.parentNode.style.position || "relative";
+
+    this.quill.on(Emitter.events.TEXT_CHANGE, this.onTextChange);
   }
+
+  onTextChange = (event: Event) => {
+    console.log("event-imageResize-change", event);
+  } 
 
   handleMouseClick = (event: MouseEvent) => {
     const target = event.target ? (event.target as HTMLElement) : null;
