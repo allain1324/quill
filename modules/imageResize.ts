@@ -1,7 +1,6 @@
 // import Delta from "quill-delta";
 import Quill from "../core/quill";
 import Module from '../core/module';
-import icons from '../ui/icons';
 
 class ImageResize extends Module {
 
