@@ -27,6 +27,7 @@ class ImageResize extends Module {
 
   onTextChange = (event: Event) => {
     console.log("event-imageResize-change", event);
+    this.repositionElements();
   } 
 
   handleMouseClick = (event: MouseEvent) => {
