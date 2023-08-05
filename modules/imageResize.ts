@@ -108,22 +108,25 @@ class ImageResize extends Module {
     console.log("deltaX", deltaX);
 
     if (this.dragCorner === this.corners[2]) {
+      console.log("size-image-before1", this.media.width, this.media?.height);
       this.media.width = Math.round(this.preDragWidth + deltaX);
       this.media.height = this.media.height;
     }
     else if (this.dragCorner === this.corners[5]) {
+      console.log("size-image-before2", this.media.width, this.media?.height);
       this.media.width = Math.round(this.preDragWidth - deltaX);
       this.media.height = this.media.height;
     }
     else if (this.dragCorner === this.corners[0] || this.dragCorner === this.corners[4]) {
+      console.log("size-image-before3", this.media.width, this.media?.height);
       this.media.width = Math.round(this.preDragWidth - deltaX);
       this.media.height = Math.round(this.preDragHeight - deltaX);
     }
     else {
+      console.log("size-image-before4", this.media.width, this.media?.height);
       this.media.width = Math.round(this.preDragWidth + deltaX);
       this.media.height = Math.round(this.preDragHeight + deltaX);
     }
-    console.log("size-image-before", this.media.width, this.media?.height);
     this.repositionElements();
     console.log("size-image-after", this.media.width, this.media?.height);
     console.log("size-image-overlay-after", this.overlay?.style?.width, this.overlay?.style?.height);
