@@ -123,9 +123,10 @@ class ImageResize extends Module {
       this.media.width = Math.round(this.preDragWidth + deltaX);
       this.media.height = Math.round(this.preDragHeight + deltaX);
     }
-    console.log("width-image", this.media.width);
-    console.log("height-image", this.media.height);
+    console.log("size-image-before", this.media.width, this.media?.height);
     this.repositionElements();
+    console.log("size-image-after", this.media.width, this.media?.height);
+    console.log("size-image-overlay-after", this.overlay?.style);
   };
 
   showOverlay = () => {
@@ -191,8 +192,6 @@ class ImageResize extends Module {
       width: `${mediaRect.width + 2}px`,
       height: `${mediaRect.height + 1}px`,
     });
-
-    console.log("media-image", this.overlay?.style)
   };
 
   setCursor = (value: string) => {
