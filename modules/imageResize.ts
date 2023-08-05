@@ -16,8 +16,7 @@ class ImageResize extends Module {
 
   constructor(quill: Quill) {
     super(quill);
-    this.quill.root.addEventListener('click', this.handleMouseClick, false);
-    this.quill.root.addEventListener('mouseover', this.handleMouseOver, false);
+    this.quill.root.addEventListener("click", this.handleMouseClick, false);
     this.parentNode = this.quill.root.parentNode as HTMLElement;
     this.parentNode.style.position =
       this.parentNode.style.position || "relative";
@@ -25,26 +24,11 @@ class ImageResize extends Module {
 
   handleMouseClick = (event: MouseEvent) => {
     const target = event.target ? (event.target as HTMLElement) : null;
-    console.log("target-mouseclick", target);
     if (this.media === target) {
       return;
     }
     if (this.media) {
       this.hide();
-    }
-    if (target && ["img"].includes(target.tagName.toLowerCase())) {
-      this.show(target as HTMLImageElement);
-    }
-  }
-
-  handleMouseOver = (event: MouseEvent): void => {
-    const target = event.target ? (event.target as HTMLElement) : null;
-    console.log("targetMouseOver", target);
-    if (this.media === target) {
-      return;
-    }
-    if (this.media) {
-      // this.hide();
     }
     if (target && ["img"].includes(target.tagName.toLowerCase())) {
       this.show(target as HTMLImageElement);
@@ -58,14 +42,12 @@ class ImageResize extends Module {
 
   show = (media: HTMLImageElement) => {
     this.media = media;
-    this.media.addEventListener('mouseover', this.handleMouseOver, false);
     this.showOverlay();
     this.showCorners();
   };
 
   hide = () => {
     if (this.media) {
-      this.media.removeEventListener('mouseover', this.handleMouseOver)
       this.media = undefined;
       this.hideOverlay();
     }
@@ -80,21 +62,6 @@ class ImageResize extends Module {
     this.addCorner("col-resize", { left: "-6px", top: "50%" });
   };
 
-  attach = (input: HTMLElement) => {
-    input.addEventListener("click", () => {
-      this.handlers().subtitle()
-    })
-  }
-
-  handlers = () => {
-    function subtitle() {
-      console.log("test subtitle");
-    }
-
-    return {
-      subtitle
-    }
-  }
 
   addCorner = (cursor: string, positions: { [key: string]: string }) => {
     const corner = document.createElement("div");
@@ -156,6 +123,8 @@ class ImageResize extends Module {
       this.media.width = Math.round(this.preDragWidth + deltaX);
       this.media.height = Math.round(this.preDragHeight + deltaX);
     }
+    console.log("width-image", this.media.width);
+    console.log("height-image", this.media.height);
     this.repositionElements();
   };
 
@@ -222,6 +191,8 @@ class ImageResize extends Module {
       width: `${mediaRect.width + 2}px`,
       height: `${mediaRect.height + 1}px`,
     });
+
+    console.log("media-image", this.overlay?.style)
   };
 
   setCursor = (value: string) => {
