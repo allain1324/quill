@@ -79,33 +79,7 @@ class ImageResize extends Module {
     this.addCorner("nwse-resize", { right: "-6px", bottom: "-6px" });
     this.addCorner("nesw-resize", { left: "-6px", bottom: "-6px" });
     this.addCorner("col-resize", { left: "-6px", top: "50%" });
-    this.addButtonNewline("pointer", { left: "50%", top: "0px" });
-
-    this.corners.forEach(ele => {
-      console.log("showCorners", ele.outerHTML);
-    })
   };
-
-  createOptionBox = () => {
-    const OPTIONBOX_CONFIG = ['subtitle']
-
-    const element = document.createElement("div");
-
-    element.classList.add('ql-toolbox-resize');
-
-    this.buildButton(element, OPTIONBOX_CONFIG);
-
-    return element;
-  }
-
-  buildButton = (element: HTMLDivElement, options: Array<string>) => {
-    Array.from(options).forEach(option => {
-      const button = document.createElement('button');
-      button.innerHTML = icons[option]
-      this.attach(button)
-      element.appendChild(button);
-    })
-  }
 
   attach = (input: HTMLElement) => {
     input.addEventListener("click", () => {
@@ -123,23 +97,6 @@ class ImageResize extends Module {
     }
   }
 
-  addButtonNewline = (cursor: string, positions: { [key: string]: string }) => {
-    const btnNewLine = document.createElement("svg");
-    console.log("before btnNewLine", btnNewLine);
-    btnNewLine.innerHTML = icons['stat2']
-    Object.assign(btnNewLine.style, {
-      position: "absolute",
-      height: "12px",
-      width: "12px",
-      fill: "black",
-      ...positions,
-    });
-    console.log("after btnNewLine", btnNewLine);
-    btnNewLine.style.cursor = cursor;
-    this.overlay?.appendChild(btnNewLine);
-
-  };
-
   addCorner = (cursor: string, positions: { [key: string]: string }) => {
     const corner = document.createElement("div");
     Object.assign(corner.style, {
@@ -156,7 +113,6 @@ class ImageResize extends Module {
     corner.addEventListener("mousedown", this.handleMousedown, false);
 
     this.overlay?.appendChild(corner);
-    this.overlay?.appendChild(this.createOptionBox());
     this.corners.push(corner);
   };
 
@@ -259,9 +215,6 @@ class ImageResize extends Module {
     const mediaRect = this.media.getBoundingClientRect();
     const containerRect = this.parentNode.getBoundingClientRect();
 
-    console.log("mediaRect", mediaRect);
-    console.log("containerRect", containerRect);
-    console.log("parentNode", this.parentNode);
     Object.assign(this.overlay.style, {
       left: `${mediaRect.left - containerRect.left - 2 + this.parentNode.scrollLeft
         }px`,
