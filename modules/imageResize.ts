@@ -143,7 +143,7 @@ class ImageResize extends Module {
 
   showOverlay = () => {
     this.hideOverlay();
-    this.quill.setSelection(0, Quill.sources.USER);
+    this.quill.setSelection(null, Quill.sources.USER);
     this.setUserSelect("none");
     document.addEventListener("keyup", this.onKeyUp, true);
     this.overlay = document.createElement("div");
